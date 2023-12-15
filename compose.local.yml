@@ -7,3 +7,4 @@ services:
       - ./:/app
     ports:
       - 8000:8000
+  # TODO: add client compose

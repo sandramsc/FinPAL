@@ -1,7 +1,7 @@
 FROM python:3.11 AS base
 WORKDIR /app
 COPY . .
-RUN pip install poetry=1.7.1
+RUN pip install poetry==1.7.1
 RUN poetry install
 RUN poetry run prisma generate
 RUN poetry run prisma migrate deploy
