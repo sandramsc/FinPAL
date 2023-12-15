@@ -30,18 +30,16 @@ a web tool that ..
 
 View the Demo [App](https://finpal.vercel.app/)
 
-
 ## Screenshots
-
 
 ## Technology Stack
 
-| Technology       | Description                                   |
-| ---------------- | --------------------------------------------- |
-| Material-UI      | React UI library                              |
-| TypeScript       | Object-oriented language                      |
-| React.js         | JavaScript library                            |
-| Python          | description                    |
+| Technology  | Description              |
+| ----------- | ------------------------ |
+| Material-UI | React UI library         |
+| TypeScript  | Object-oriented language |
+| React.js    | JavaScript library       |
+| Python      | description              |
 
 ## Features
 
@@ -63,18 +61,25 @@ $ git clone https://github.com/sandramsc/FinPAL.git
 
 **Step #2**
 
+- Fill in all .env
+
+- Start docker compose
+
+```
+docker compose -f compose.local.yml up
+```
+
 - Install dependencies in both frontend and backend folders: `npm i` OR `yarn`
 
 - To start the webapp, run: `npm start` OR `yarn start`
 
-
 ## Authors
 
-| Name            | Link                                   |
-| --------------- | -------------------------------------- |
+| Name            | Link                                        |
+| --------------- | ------------------------------------------- |
 | Sandra Ashipala | https://www.linkedin.com/in/sandraashipala/ |
-| Viky Wahjoedin | https://www.linkedin.com/in/vikyweb/ |
-| name | social |
+| Viky Wahjoedin  | https://www.linkedin.com/in/vikyweb/        |
+| name            | social                                      |
 
 ## License
 
