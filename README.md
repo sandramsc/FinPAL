@@ -78,4 +78,4 @@ $ git clone https://github.com/sandramsc/FinPAL.git
 
 ## License
 
-[![GitLicense](https://img.shields.io/badge/License-MIT-lime.svg)](https://github.com/sandramsc/CultiVate/blob/master/LICENSE.md)
+[![GitLicense](https://img.shields.io/badge/License-MIT-lime.svg)](https://github.com/sandramsc/FinPAL/blob/master/LICENSE.md)
