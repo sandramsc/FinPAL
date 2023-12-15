@@ -10,6 +10,7 @@ python = ">=3.10,<3.13"
 fastapi = "^0.105.0"
 qdrant-client = "^1.7.0"
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+python-dotenv = "^1.0.0"
 
 
 [build-system]
