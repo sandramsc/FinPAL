@@ -99,11 +99,29 @@ async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     agent = Agent(thread_id=str(thread_id))
     # create an empty message
     loading = await update.message.reply_markdown_v2(text="_typing_ \.\.\.")
-    streaming = agent.run(message_content=message)
-    async for progress in streaming:
-        print("progress",progress.content)
-        await loading.edit_text(text=progress.content)
     
+    # initialize truera
+    # Imports main tools:
+    from trulens_eval import Feedback, OpenAI as fOpenAI, Tru
+    tru = Tru()
+    
+    streaming = agent.run(message_content=message)
+    
+    async for progress in streaming:
+        await loading.edit_text(text=progress.content)
+        
+    # initialize feedback
+    # Initialize OpenAI-based feedback function collection class:
+    fopenai = fOpenAI()
+
+    # Define a relevance function from openai
+    f_relevance = Feedback(fopenai.relevance).on_input_output()
+    
+    from trulens_eval import TruBasicApp
+    tru_llm_standalone_recorder = TruBasicApp(agent.run, app_id="finPal", feedbacks=[f_relevance])
+    
+    with tru_llm_standalone_recorder as recording:
+        tru_llm_standalone_recorder.app(message)
 
 def main() -> None:
     """Start the bot."""
@@ -119,7 +137,6 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
-
 
 if __name__ == "__main__":
     main()

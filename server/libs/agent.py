@@ -2,6 +2,7 @@
 from typing import AsyncIterable, Literal, Optional
 from pydantic import BaseModel
 
+
 SYSTEM_PROMPT = """
 Develop a conversational system prompt for a financial assistant named finPAL. 
 finPAL is designed to analyze users' financial data and assist with their financial goals. 
@@ -12,29 +13,26 @@ The tone should be informative and engaging.
 from libs.typings import Message
 
 
-class Agent :
-    def __init__(self, thread_id:str,  system_prompt=SYSTEM_PROMPT) -> None:
+class Agent:
+    def __init__(self, thread_id: str, system_prompt=SYSTEM_PROMPT) -> None:
         self.system_prompt = system_prompt
         self.thread_id = thread_id
         pass
 
-    async def messages(self) ->list[Message]:
+    async def messages(self) -> list[Message]:
         from libs.prisma import db
+
         await db.connect()
         # retrieve messages from DB
         db_messages = await db.message.find_many(
-            where={
-                "threadId": self.thread_id
-            },
-            take=5,
-            order={
-                "createdAt": "asc"
-            }
+            where={"threadId": self.thread_id}, take=5, order={"createdAt": "asc"}
         )
         await db.disconnect()
         parsed_messages = []
         for message in db_messages:
-            parsed_messages.append(Message(role= "assistant" if message.isBot else "user"))
+            parsed_messages.append(
+                Message(role="assistant" if message.isBot else "user")
+            )
         return parsed_messages
 
     async def run(self, message_content: str) -> AsyncIterable[Message]:
@@ -48,9 +46,10 @@ class Agent :
 
         # get prediction
         from libs.genai import GeminiPro
+
         model = GeminiPro()
-        
-        res =  model.achat(messages=messages)
+
+        res = model.achat(messages=messages)
 
         # we send the streaming response
         text_chunk = ""
@@ -59,4 +58,5 @@ class Agent :
             yield Message(content=text_chunk, role="assistant")
 
     def logger(self, log_object=str):
-        print("logger",log_object)
+        print("logger", log_object)
+
