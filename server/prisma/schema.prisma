@@ -14,7 +14,34 @@ datasource db {
 }
 
 model User {
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  telegramThread Thread   @relation(fields: [threadId], references: [id])
+  telegramId     String?  @unique
+  threadId       String
+}
+
+model Thread {
+  id        String         @id @default(uuid())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now()) @updatedAt
+  platform  ThreadPlatform
+  User      User[]
+  messages  Message[]
+}
+
+enum ThreadPlatform {
+  telegram
+}
+
+model Message {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+  text      String?  @default("")
+  file      Bytes?
+  isBot     Boolean
+  Thread    Thread?  @relation(fields: [threadId], references: [id])
+  threadId  String?
 }

@@ -1,27 +1,14 @@
 from dotenv import load_dotenv
-from fastapi.responses import RedirectResponse
-import httpx
 
 load_dotenv()
-import os
+from fastapi.responses import RedirectResponse
+
+from libs.telegram import Telegram
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-SERVER_URL = os.getenv("SERVER_URL")
-
-if not TELEGRAM_BOT_TOKEN:
-    raise Exception("TELEGRAM_BOT_TOKEN is not set")
-
-if not SERVER_URL:
-    raise Exception("SERVER_URL is not set")
-
-# init webhook
-httpx.get(
-    f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/setWebhook?url={SERVER_URL}/telegram_webhook"
-)
 
 app = FastAPI()
 
@@ -46,9 +33,11 @@ def read_root():
     return RedirectResponse("/docs")
 
 
-@app.get("/telegram_webhook")
-async def telegram_webhook():
-    return {"message": "Hello World"}
+@app.post("/telegram_webhook")
+async def telegram_webhook(request: Request) -> None:
+    parsed_request = await request.json()
+    # telegram = Telegram(parsed_request=parsed_request)
+    # await telegram.send_message("Hello, I'm a bot!")
 
 
 @app.get("/items/{item_id}")
