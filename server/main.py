@@ -1,20 +1,22 @@
 from dotenv import load_dotenv
 
 load_dotenv()
+from fastapi.responses import RedirectResponse
 
+from libs.telegram import Telegram
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
 
+app = FastAPI()
 
 origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
     "http://localhost",
-    "http://localhost:8080",
+    "http://localhost:8000",
 ]
 
 app.add_middleware(
@@ -28,7 +30,14 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return RedirectResponse("/docs")
+
+
+@app.post("/telegram_webhook")
+async def telegram_webhook(request: Request) -> None:
+    parsed_request = await request.json()
+    # telegram = Telegram(parsed_request=parsed_request)
+    # await telegram.send_message("Hello, I'm a bot!")
 
 
 @app.get("/items/{item_id}")
