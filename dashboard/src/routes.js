@@ -76,7 +76,7 @@ const routes = [
     type: "collapse",
     name: "Sign Out",
     key: "sign-in",
-    route: "/authentication/sign-in",
+    href: "https://finpallandingpage.vercel.app/",
     icon: <IoIosDocument size="15px" color="inherit" />,
     component: SignIn,
     noCollapse: true,
