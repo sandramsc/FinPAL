@@ -1,15 +1,16 @@
 {
-	"name": "vision-ui-dashboard-react",
+	"name": "finpal",
 	"version": "3.0.0",
 	"private": true,
-	"description": "Material UI version of Vision UI Dashboard by Creative Tim",
+	"description": "A multimodal finance solution",
 	"homepage": "https://demos.creative-tim.com/vision-ui-dashboard-react/#/dashboard",
 	"bugs": {
 		"url": "https://github.com/creativetimofficial/vision-ui-dashboard-react/issues"
 	},
+	"engines":{"node":"18","npm":"9.2.0"},
 	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/creativetimofficial/vision-ui-dashboard-react.git"
+		"type": "Hackathon",
+		"url": "https://github.com/sandramsc/FinPAL"
 	},
 	"dependencies": {
 		"@emotion/cache": "11.4.0",
@@ -45,8 +46,8 @@
 		"react-scripts": "4.0.3"
 	},
 	"scripts": {
-		"start": "react-scripts --openssl-legacy-provider start",
-		"build": "react-scripts --openssl-legacy-provider build",
+		"start":"react-scripts start",
+		"build":"react-scripts build DISABLE_ESLINT_PLUGIN=true",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
