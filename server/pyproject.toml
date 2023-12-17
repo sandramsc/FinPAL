@@ -21,6 +21,8 @@ matplotlib = "^3.8.2"
 trulens-eval = "^0.19.1"
 ipython = "^8.18.1"
 streamlit-javascript = "^0.1.5"
+openai = "^1.5.0"
+instructor = "^0.4.4"
 
 
 [build-system]
