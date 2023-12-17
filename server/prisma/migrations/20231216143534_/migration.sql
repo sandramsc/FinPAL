@@ -1,17 +1,23 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "ThreadPlatform" AS ENUM ('telegram');
 
-  - Added the required column `threadId` to the `User` table without a default value. This is not possible if the table is not empty.
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "telegramId" TEXT,
+    "threadId" TEXT NOT NULL,
 
-*/
--- AlterTable
-ALTER TABLE "User" ADD COLUMN     "threadId" TEXT NOT NULL;
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Thread" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "platform" "ThreadPlatform" NOT NULL,
 
     CONSTRAINT "Thread_pkey" PRIMARY KEY ("id")
 );
@@ -28,6 +34,9 @@ CREATE TABLE "Message" (
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_telegramId_key" ON "User"("telegramId");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_threadId_fkey" FOREIGN KEY ("threadId") REFERENCES "Thread"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
