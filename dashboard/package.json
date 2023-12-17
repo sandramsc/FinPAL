@@ -1,13 +1,12 @@
 {
 	"name": "finpal",
 	"version": "3.0.0",
-	"private": true,
 	"description": "A multimodal finance solution",
-	"homepage": "https://demos.creative-tim.com/vision-ui-dashboard-react/#/dashboard",
-	"bugs": {
-		"url": "https://github.com/creativetimofficial/vision-ui-dashboard-react/issues"
+	"license": "MIT",
+	"engines": {
+		"node": "18.18.2",
+		"npm": "9.2.0"
 	},
-	"engines":{"node":"18.18.2","npm":"9.2.0"},
 	"repository": {
 		"type": "Hackathon",
 		"url": "https://github.com/sandramsc/FinPAL"
@@ -43,11 +42,11 @@
 		"@testing-library/react": "11.1.0",
 		"@testing-library/user-event": "12.1.10",
 		"eslint": "^7.11.0",
-		"react-scripts": "4.0.3"
+		"react-scripts": "^5.0.1"
 	},
 	"scripts": {
-		"start":"react-scripts start",
-		"build":"react-scripts build DISABLE_ESLINT_PLUGIN=true",
+		"start": "react-scripts start",
+		"build": "react-scripts build DISABLE_ESLINT_PLUGIN=true",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
