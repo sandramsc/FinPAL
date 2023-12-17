@@ -29,22 +29,28 @@ const Navbar = () => {
       </ul>
 
       <div className="gpt3__navbar">
-<a href="">
 <div className="gpt3__navbar-sign">
+<a href="https://finpaldash.vercel.app/">
   <p>Sign in</p>
+  </a>
+  <a href="https://finpaldash.vercel.app/">
   <button type="button">Sign up</button>
+  </a>
 </div>
-</a>
 <div className="gpt3__navbar-menu">
   {toggleMenu
     ? <RiCloseLine color="#fff" size={27} onClick={() => setToggleMenu(false)} />
     : <RiMenu3Line color="#fff" size={27} onClick={() => setToggleMenu(true)} />}
   {toggleMenu && (
-    <a href="">
+    <a href="https://finpaldash.vercel.app/">
   <div className="gpt3__navbar-menu_container scale-up-center">
     <div className="gpt3__navbar-menu_container-links-sign">
+      <a href="">
       <p>Sign in</p>
+      </a>
+      <a>
       <button type="button">Sign up</button>
+      </a>
     </div>
   </div>
   </a>
