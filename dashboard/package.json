@@ -2,8 +2,6 @@
 	"name": "vision-ui-dashboard-react",
 	"version": "3.0.0",
 	"private": true,
-	"author": "Creative Tim",
-	"license": "See license in https://www.creative-tim.com/license",
 	"description": "Material UI version of Vision UI Dashboard by Creative Tim",
 	"homepage": "https://demos.creative-tim.com/vision-ui-dashboard-react/#/dashboard",
 	"bugs": {
