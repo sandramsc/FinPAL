@@ -1,4 +1,4 @@
-import { people01, people02, people03, github, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
+import { feedimg1, feedimg2, feedimg3, feedimg4, github, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
 
 export const navLinks = [
   {
@@ -48,33 +48,33 @@ export const feedback = [
     id: "feedback-1",
     content:
       "Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.",
-    name: "Cash flow",
+    name: "Track Receipts",
     title: "Learn More",
-    img: people01,
+    img: feedimg1,
   },
   {
     id: "feedback-2",
     content:
       "Money makes your life easier. If you're lucky to have it, you're lucky.",
-    name: "Income",
+    name: "Personal Cards",
     title: "Learn More",
-    img: people02,
+    img: feedimg2,
   },
   {
     id: "feedback-3",
     content:
       "It is usually people in the money business, finance, and international trade that are really rich.",
-    name: "Detect",
+    name: "Pay bills",
     title: "Learn More",
-    img: people03,
+    img: feedimg3,
   },
   {
     id: "feedback-3",
     content:
       "It is usually people in the money business, finance, and international trade that are really rich.",
-    name: "Analyze",
+    name: "Manage Expenses",
     title: "Learn More",
-    img: people03,
+    img: feedimg4,
   },
 ];
 
