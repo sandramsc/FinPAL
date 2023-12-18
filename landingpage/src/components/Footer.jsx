@@ -4,6 +4,8 @@ import { footerLinks, socialMedia } from "../constants";
 
 const Footer = () => (
   <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
+     <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 my-6 border-t-[1px] border-t-[#3F3E45]">
+      </div>
     <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
 
       <div className="flex-[1.5] w-full flex flex-row justify-between flex-wrap md:mt-0 mt-10">

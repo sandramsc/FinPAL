@@ -1,4 +1,4 @@
-import { feedimg1, feedimg2, feedimg3, feedimg4, github, linkedin, twitter, integrations, send, shield, star  } from "../assets";
+import { feedimg1, feedimg2, feedimg3, feedimg4, github, linkedin, twitter, integrations, send, slack, shield, star  } from "../assets";
 
 export const navLinks = [
   {
@@ -179,17 +179,22 @@ export const socialMedia = [
   {
     id: "social-media-1",
     icon: github,
-    link: "https://www.github.com/",
+    link: "#",
+  },
+  {
+    id: "social-media-4",
+    icon: slack,
+    link: "#",
   },
   {
     id: "social-media-3",
     icon: twitter,
-    link: "https://www.twitter.com/",
+    link: "#",
   },
   {
     id: "social-media-4",
     icon: linkedin,
-    link: "https://www.linkedin.com/",
+    link: "#",
   },
 ];
 
