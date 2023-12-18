@@ -98,49 +98,78 @@ export const stats = [
 
 export const footerLinks = [
   {
-    title: "Useful Links",
+    title: "Features",
     links: [
       {
-        name: "Content",
-        link: "https://www.hoobank.com/content/",
+        name: "Expense Management",
+        link: "#",
       },
       {
-        name: "How it Works",
-        link: "https://www.hoobank.com/how-it-works/",
+        name: "Bill Pay",
+        link: "#",
       },
       {
-        name: "Create",
-        link: "https://www.hoobank.com/create/",
+        name: "Receipt Scanning App",
+        link: "#",
+      },
+      {
+        name: "Expense Reports",
+        link: "#",
       }
     ],
   },
   {
-    title: "Community",
+    title: "Resources",
     links: [
       {
-        name: "Help Center",
-        link: "https://www.hoobank.com/help-center/",
+        name: "Support",
+        link: "#",
       },
       {
-        name: "Partners",
-        link: "https://www.hoobank.com/partners/",
+        name: "FinPAL Help",
+        link: "#",
       },
       {
-        name: "Suggestions",
-        link: "https://www.hoobank.com/suggestions/",
+        name: "Community",
+        link: "#",
+      },
+      {
+        name: "Privacy",
+        link: "#",
       }
     ],
   },
   {
-    title: "Partner",
+    title: "Get Started",
     links: [
       {
-        name: "Our Partner",
-        link: "https://www.hoobank.com/our-partner/",
+        name: "Sign Up",
+        link: "#",
       },
       {
-        name: "Become a Partner",
-        link: "https://www.hoobank.com/become-a-partner/",
+        name: "Sign In",
+        link: "#",
+      },
+      {
+        name: "Contact Sales",
+        link: "#",
+      },
+    ],
+  },
+  {
+    title: "Learn more",
+    links: [
+      {
+        name: "About FinPAL",
+        link: "#",
+      },
+      {
+        name: "Blog",
+        link: "#",
+      },
+      {
+        name: "Sponsorships",
+        link: "#",
       },
     ],
   },
