@@ -47,7 +47,7 @@ export const feedback = [
   {
     id: "feedback-1",
     content:
-      "Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.",
+      "Revolutionize expense management with smart receipt scanning for seamless capturing, sorting, integrations, and robust security, ensuring a comprehensive solution.",
     name: "Track Receipts",
     title: "Learn More",
     img: feedimg1,
@@ -55,7 +55,7 @@ export const feedback = [
   {
     id: "feedback-2",
     content:
-      "Money makes your life easier. If you're lucky to have it, you're lucky.",
+      "Transform finances with AI-driven innovation: Unlock insights, smart spending, and cutting-edge expense management for a revolutionary approach to personal finance.",
     name: "Personal Cards",
     title: "Learn More",
     img: feedimg2,
@@ -63,7 +63,7 @@ export const feedback = [
   {
     id: "feedback-3",
     content:
-      "It is usually people in the money business, finance, and international trade that are really rich.",
+      "Revolutionize bill payments with our AI-driven app—seamless, cutting-edge automation, SmartScan, automated approvals, all in inclusive plans at no extra cost.",
     name: "Pay bills",
     title: "Learn More",
     img: feedimg3,
@@ -71,7 +71,7 @@ export const feedback = [
   {
     id: "feedback-3",
     content:
-      "It is usually people in the money business, finance, and international trade that are really rich.",
+      "Simplify expense management with streamlined automation, minimizing errors, boosting productivity, and saving 75% of team time.",
     name: "Manage Expenses",
     title: "Learn More",
     img: feedimg4,
