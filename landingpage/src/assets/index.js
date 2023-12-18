@@ -5,11 +5,8 @@
 <a href="https://www.flaticon.com/free-animated-icons/bribery" title="bribery animated icons">Bribery animated icons created by Freepik - Flaticon</a>
  */
 
-import airbnb from "./airbnb.png";
-import binance from "./binance.png";
+import integrations from "./integrations.png";
 import telegrambot from "./telegrambot.png";
-import coinbase from "./coinbase.png";
-import dropbox from "./dropbox.png";
 import logo from "./logo.png";
 import robot from "./robot.png";
 import footerlogo from "./footer-logo.png";
@@ -30,11 +27,8 @@ import feedimg3 from "./feedimg3.gif";
 import feedimg4 from "./feedimg4.gif";
 
 export {
-  airbnb,
-  binance,
+  integrations,
   telegrambot,
-  coinbase,
-  dropbox,
   logo,
   robot,
   send,
