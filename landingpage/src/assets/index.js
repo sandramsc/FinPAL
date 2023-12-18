@@ -9,6 +9,7 @@ import integrations from "./integrations.png";
 import telegrambot from "./telegrambot.png";
 import logo from "./logo.png";
 import robot from "./robot.png";
+import slack from "./slack.png";
 import footerlogo from "./footer-logo.png";
 import send from "./Send.svg";
 import shield from "./Shield.svg";
@@ -18,7 +19,7 @@ import close from "./close.svg";
 import google from "./google.svg";
 import apple from "./apple.svg";
 import arrowUp from "./arrow-up.svg";
-import github from "./github.svg";
+import github from "./github.png";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
 import feedimg1 from "./feedimg1.gif";
@@ -29,6 +30,7 @@ import feedimg4 from "./feedimg4.gif";
 export {
   integrations,
   telegrambot,
+  slack,
   logo,
   robot,
   send,
