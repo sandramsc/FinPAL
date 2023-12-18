@@ -1,21 +1,21 @@
-import { feedimg1, feedimg2, feedimg3, feedimg4, github, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
+import { feedimg1, feedimg2, feedimg3, feedimg4, github, linkedin, twitter, integrations, send, shield, star  } from "../assets";
 
 export const navLinks = [
-  {
-    id: "home",
-    title: "Home",
-  },
   {
     id: "features",
     title: "Features",
   },
   {
-    id: "product",
-    title: "Product",
+    id: "resources",
+    title: "Resources",
   },
   {
-    id: "clients",
-    title: "Clients",
+    id: "learn",
+    title: "Learn",
+  },
+  {
+    id: "start",
+    title: "Get Started",
   },
 ];
 
@@ -196,18 +196,6 @@ export const socialMedia = [
 export const clients = [
   {
     id: "client-1",
-    logo: airbnb,
-  },
-  {
-    id: "client-2",
-    logo: binance,
-  },
-  {
-    id: "client-3",
-    logo: coinbase,
-  },
-  {
-    id: "client-4",
-    logo: dropbox,
+    logo: integrations,
   },
 ];
