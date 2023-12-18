@@ -4,10 +4,12 @@ import Button from "./Button";
 const CTA = () => (
   <section className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}>
     <div className="flex-1 flex flex-col">
-      <h2 className={styles.heading2}>Let’s try our service now!</h2>
-      <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-        Everything you need to accept card payments and grow your business
-        anywhere on the planet.
+      <h4 className={styles.heading2}>Ready to effortlessly manage <br className="sm:block hidden" />{" "}
+      <span> your receipts and expenses?</span>{" "}
+      
+      </h4>
+      <p className={`${styles.paragraph} max-w-[700px] mt-5`}>
+      Enter your contact info to maximize your finances with FinPAL's innovative time-saving spend tools.
       </p>
     </div>
 
@@ -15,6 +17,7 @@ const CTA = () => (
       <Button />
     </div>
   </section>
+  
 );
 
 export default CTA;

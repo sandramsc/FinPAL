@@ -12,6 +12,7 @@ import coinbase from "./coinbase.png";
 import dropbox from "./dropbox.png";
 import logo from "./logo.png";
 import robot from "./robot.png";
+import footerlogo from "./footer-logo.png";
 import send from "./Send.svg";
 import shield from "./Shield.svg";
 import star from "./Star.svg";
@@ -51,4 +52,5 @@ export {
   feedimg2,
   feedimg3,
   feedimg4,
+  footerlogo,
 };
