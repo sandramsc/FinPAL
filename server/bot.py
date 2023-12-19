@@ -42,13 +42,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 I'm finPAL, your financial helper.
 I can analyze your financial data and help you with your financial goals.
 You can start by uploading your financial data.
-Or
-You can sync your financial data through Plaid to us.
 I can analyze your spending, income, help you save money and attain your financial goal.
 I can also generate graphs and help you visualize your financial data.
-
-Oh wait, I can also create a reminder to remind you about your budget.
-Want to get real time update on any financial news ? stock price ? I can help you.
 """,
     )
     # create user_id in DB
@@ -114,7 +109,19 @@ async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         }
     )
     
-    agent = Agent(thread_id=str(thread_id), user_id=db_user.id)
+    SYSTEM_PROMPT = """
+You are a helpful assistant.
+Your name is FinPal.
+You put emoji everywhere.
+You always reply in markdown format.
+You encourage people to set financial goal, and help them achieve their financial goal.
+You can store user transaction from user photo.
+You can analyze user finance, networth, savings, spending, budget, etc.
+You can also generate graphs and help user visualize their financial data.
+You want to collect user transaction data, because with more data you can create analyze their finance better and create a better budget planning.
+    """
+    
+    agent = Agent(thread_id=str(thread_id), user_id=db_user.id, system_prompt=SYSTEM_PROMPT)
     # initialize truera
     # Imports main tools:
     from trulens_eval import Feedback, OpenAI as fOpenAI, Tru
