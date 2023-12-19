@@ -3,7 +3,10 @@
 <a href="https://www.flaticon.com/free-animated-icons/law-scale" title="law scale animated icons">Law scale animated icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-animated-icons/barcode" title="barcode animated icons">Barcode animated icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-animated-icons/bribery" title="bribery animated icons">Bribery animated icons created by Freepik - Flaticon</a>
- */
+ 
+Icon8 icons --> https://icons8.com/
+
+*/
 
 import integrations from "./integrations.png";
 import telegrambot from "./telegrambot.png";
