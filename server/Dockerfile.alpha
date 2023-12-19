@@ -6,5 +6,6 @@ RUN poetry install
 RUN poetry run prisma generate
 RUN poetry run prisma migrate deploy
 EXPOSE 8000
-# CMD poetry run uvicorn main:app --reload --host 0.0.0.0 --port 8000
-CMD poetry run python bot.py
+
+# should be on a separate dockerfile but we are saving disk space
+CMD poetry run python bot.py & poetry run uvicorn main:app --host 0.0.0.0 --port 8000

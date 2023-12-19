@@ -7,7 +7,7 @@ from typing import Union
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-
+from routes import transactions
 
 app = FastAPI()
 
@@ -16,6 +16,8 @@ origins = [
     "https://localhost.tiangolo.com",
     "http://localhost",
     "http://localhost:8000",
+    "https://finpaldash.vercel.app",
+    "https://finpallandingpage.vercel.app"
 ]
 
 app.add_middleware(
@@ -26,8 +28,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(transactions.router)
+
 
 @app.get("/")
 def read_root():
     return RedirectResponse("/docs")
-
