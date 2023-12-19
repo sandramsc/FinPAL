@@ -7,10 +7,10 @@ from instructor import OpenAISchema
 
 class SaveTransactionToDB(OpenAISchema):
     "Save user transaction into database"
-    amountOut: str
-    amountIn: str
+    amountOut: str = None
+    amountIn: str = None
     currency: str
-    sourceOrPayee: str
+    sourceOrPayee: str = None
     category: Literal[
         "Grocery",
         "FoodAndDining",
@@ -22,13 +22,12 @@ class SaveTransactionToDB(OpenAISchema):
         "Clothing",
         "Education",
         "Miscellaneous",
-    ]
-    description: str
-    transactionDate: Annotated[str, Field(description="yyyymmdd")]
+    ] = "Miscellaneous"
+    description: str = None
+    transactionDate: Annotated[str, Field(description="yyyymmdd")] = None
 
 
 async def save_transaction_to_db(input: SaveTransactionToDB, user_id: str):
-    print("save_transaction_to_db", input.model_dump())
     from libs.prisma import db
     # save data to db
     db_transaction = db.transaction.create(
@@ -43,8 +42,8 @@ async def save_transaction_to_db(input: SaveTransactionToDB, user_id: str):
             "userId": user_id,
         }
     )
-    print(db_transaction)
-    return "saved to db"
+    print("db_transaction",db_transaction)
+    return db_transaction.model_dump_json()
 
 
 TOOLS = {

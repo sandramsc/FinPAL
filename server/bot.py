@@ -2,18 +2,7 @@
 # pylint: disable=unused-argument
 # This program is dedicated to the public domain under the CC0 license.
 
-"""
-Simple Bot to reply to Telegram messages.
 
-First, a few handler functions are defined. Then, those functions are passed to
-the Application and registered at their respective places.
-Then, the bot is started and runs until we press Ctrl-C on the command line.
-
-Usage:
-Basic Echobot example, repeats messages.
-Press Ctrl-C on the command line or send a signal to the process to stop the
-bot.
-"""
 
 import logging
 from dotenv import load_dotenv
@@ -42,7 +31,6 @@ logging.basicConfig(
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
-
 
 # Define a few command handlers. These usually take the two arguments update and
 # context.
@@ -99,19 +87,21 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
     await update.message.reply_text(update.message.text)
 
-
 async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    
     # thread id is similar to user id in this case
     user_id = update.effective_user.id
     thread_id = update.effective_chat.id
     message_id = update.effective_message.message_id
     message = update.effective_message.text
     photo = update.effective_message.photo
-    print("photo",photo)
+    from telegram.constants import ChatAction
+    
+    await context.bot.send_chat_action(chat_id=thread_id, action=ChatAction.TYPING)
+
     if len(photo) > 0:
         photo = await photo[-1].get_file()
         photo = await photo.download_as_bytearray()
-        print("photo_size",len(photo))
 
     from libs.agent import Agent
 
