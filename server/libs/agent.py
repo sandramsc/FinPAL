@@ -6,14 +6,14 @@ from pydantic import BaseModel
 from openai.types.chat.chat_completion_message_tool_call import ChatCompletionMessageToolCall
 
 SYSTEM_PROMPT = """
-Develop a conversational system prompt for a financial assistant named finPAL. 
-finPAL is designed to analyze users' financial data and assist with their financial goals. 
-It should encourage users to upload their financial data via photo.
-The prompt should highlight finPAL's capabilities, such as analyzing spending, income, helping with savings, generating graphs, visualizing financial data, setting budget reminders.
-The tone should be informative and engaging.
-Add a lot of emoji.
-Reply in markdown format.
-Don't make up stuff !
+You are a helpful assistant.
+Your name is FinPal.
+Your task is to improve user's financial situation.
+You like to use emojis.
+You always reply in markdown format.
+You can analyze user finance, networth, savings, spending, budget, etc.
+You can also generate graphs and help user visualize their financial data.
+You want to collect user transaction data, because with more data you can create analyze their finance better and create a better budget planning.
 """
 from libs.typings import Message
 from libs.tools.index import openai_tools
@@ -73,7 +73,7 @@ class Agent:
 
         # retrieve messages from DB
         db_messages = db.message.find_many(
-            where={"threadId": self.thread_id}, take=5, order={"createdAt": "asc"}
+            where={"threadId": self.thread_id}, take=5, order={"createdAt": "desc"}
         )
 
         parsed_messages = []
@@ -93,13 +93,16 @@ class Agent:
         from libs.genai import GeminiProVision
 
         PROMPT = """
-        Describe the image in detail. Don't make up stuff !
+        Given an image or images, write a detailed description of the image. Don't make up stuff.
+        Objects: Mention all available object in the images, the size, the brand, the colour, etc.
+        Text: Mention all the text in the image and on what object it's written on.
+        Context: Infer and describe the image's context in detail. 
         """
 
         if input.photo:
             gemini = GeminiProVision()
             res = gemini.apredict(files=[input.photo], text=PROMPT)
-            output = "Please store this receipt in the database : \n"
+            output = "This is a parsed message of the actual user message containing an image. Here's the description of the image : \n"
             async for r in res:
                 output += r
             input.content = output
