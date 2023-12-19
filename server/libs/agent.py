@@ -21,12 +21,15 @@ from openai.types.chat.chat_completion_message_param import ChatCompletionMessag
 
 class Agent:
     def __init__(
-        self, thread_id: str, user_id=str, system_prompt=SYSTEM_PROMPT, tools=openai_tools
+        self, thread_id: str, user_id=str, system_prompt=SYSTEM_PROMPT, tools=openai_tools, model_max_token=16385
     ) -> None:
         self.system_prompt = system_prompt
         self.thread_id = thread_id
         self.tools = tools
         self.user_id = user_id
+        self.model_max_token = model_max_token
+        self.max_response_token = int(self.model_max_token / 9)
+        self.max_context_token = int(self.model_max_token - self.max_response_token)
         pass
 
     # async def messages(self) -> list[Message]:
@@ -69,23 +72,49 @@ class Agent:
     #         yield Message(content=complete_text, role="assistant")
 
     async def messages(self) -> list[Message]:
+        """
+        Retrieves a list of messages associated with the current thread.
+
+        Returns:
+            list[Message]: A list of Message objects representing the retrieved messages.
+        """
         from libs.prisma import db
 
         # retrieve messages from DB
+        # reversed because we want oldest messages at the top, newest at the bottom
         db_messages = db.message.find_many(
             where={"threadId": self.thread_id}, take=5, order={"createdAt": "desc"}
         )
 
+        reversed_db_messages = db_messages[::-1]
         parsed_messages = []
-        for message in db_messages:
+        for message in reversed_db_messages:
             parsed_messages.append(
                 Message(
                     content=message.text, role="assistant" if message.isBot else "user"
                 )
             )
+        # add system prompt at the end to enforce prompt
+        parsed_messages.append(Message(content=self.system_prompt, role="system"))
+        
         return parsed_messages
     
     async def truncate_messages(self, messages: list[Message])->list[Message]:
+        import tiktoken
+        encoding = tiktoken.get_encoding("cl100k_base")
+        encoding = tiktoken.encoding_for_model("gpt-3.5-turbo-1106")
+        context_token_left = self.max_context_token
+        
+        # we will start counting token from the newest messages (bottom / last), and truncate the oldest one (1st / top)
+        index = len(messages) - 1
+        while index >= 0 and context_token_left >= 0:
+            message = messages[index]
+            token = len(encoding.encode(message.model_dump_json()))
+            context_token_left -= token
+            index -= 1
+        
+        # we truncate messages based on index
+        messages = messages[index+1:]
         return messages
 
     async def input_parser(self, input: Message) -> Message:
@@ -96,7 +125,15 @@ class Agent:
         Given an image or images, write a detailed description of the image. Don't make up stuff.
         Objects: Mention all available object in the images, the size, the brand, the colour, etc.
         Text: Mention all the text in the image and on what object it's written on.
-        Context: Infer and describe the image's context in detail. 
+        
+        If it's a receipt, extract all the information from the receipt.
+            "amountIn": 
+            "amountOut": 
+            "category": 
+            "transactionDate": 
+            "currency": 
+            "description": 
+            "sourceOrPayee": 
         """
 
         if input.photo:
@@ -125,22 +162,23 @@ class Agent:
         # this messages object will be mutated throughout the run
         messages = await self.messages()
 
-        # add system prompt at the end
-        messages.append(Message(content=self.system_prompt, role="system"))
-
         # parse user message
         parsed_input = await self.input_parser(input=input)
 
         # add user message
         messages.append(Message(content=parsed_input.content, role="user"))
+        
+        # truncate messages
+        messages = await self.truncate_messages(messages=messages)
+        
         self.run_left = 1
         while self.run_left > 0:
             self.run_left -= 1
             # iterate the run
             run_step_output = await self.run_step(input=messages)
             # remove 1st message to maintain context window
-            # TODO: use truncation and summarization
-            # messages.pop(0)
+
+            messages.pop(0)
 
             # send newly generated message
             for new_message in run_step_output:
@@ -150,7 +188,7 @@ class Agent:
         from libs.openai import openai
 
         res = await openai.chat.completions.create(
-            messages=input, model="gpt-3.5-turbo-1106", tools=self.tools, presence_penalty=2
+            messages=input, model="gpt-3.5-turbo-1106", tools=self.tools, presence_penalty=2,max_tokens=self.max_response_token
         )
         res_messages = res.choices
         
@@ -161,9 +199,10 @@ class Agent:
             # append 1st response to message
             if tool_calls and len(tool_calls) > 0:
                 self.run_left += 1
+                
                 # add toolcall to message
                 input.append(res_message.message)
-
+                
                 tool_calls_res = await self.execute_tools(input=tool_calls)
 
                 # append tool_call_res to message
@@ -175,16 +214,21 @@ class Agent:
 
     async def execute_tools(self, input: list[ChatCompletionMessageToolCall]) -> list[Message]:
         from libs.tools.index import TOOLS
+        
         messages = []
         for tool_call in input:
-            tool_name = tool_call.function.name
-            fn = TOOLS[tool_name]["fn"]
-            tool_args = json.loads(tool_call.function.arguments)
-            # this will return a pydantic class
-            input_schema = TOOLS[tool_name]["schema"]
-            response = await fn(input= input_schema(**tool_args), user_id = self.user_id)
-            messages.append(Message(content=response, role="tool",name=tool_name, tool_call_id=tool_call.id))
-
+            try:
+                tool_name = tool_call.function.name
+                fn = TOOLS[tool_name]["fn"]
+                tool_args = json.loads(tool_call.function.arguments)
+                # this will return a pydantic class
+                input_schema = TOOLS[tool_name]["schema"]
+                response = await fn(input= input_schema(**tool_args), user_id = self.user_id)
+                messages.append(Message(content=response, role="tool",name=tool_name, tool_call_id=tool_call.id))
+            except Exception as e:
+                print(e)
+                self.run_left += 1
+                messages.append(Message(content=f"Error: {e}", role="tool", name=tool_name, tool_call_id=tool_call.id))
         return messages
     
     async def output_parser(self, output: Message) -> Message:

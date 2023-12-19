@@ -52,24 +52,24 @@ class QueryUserTransaction(OpenAISchema):
     "Query user transaction data from database"
     startDate: Annotated[str, Field(description="query startdate in yyyymmdd format")]
     endDate: Annotated[str, Field(description="query enddate in yyyymmdd format")]
-    sourceOrPayee: Annotated[str, Field(description="query sourceOrPayee column")] = None
-    category: Annotated[
-        Literal[
-            "Grocery",
-            "FoodAndDining",
-            "RentAndMortgage",
-            "Utilities",
-            "Transportation",
-            "Entertainment",
-            "Healthcare",
-            "Clothing",
-            "Education",
-            "Miscellaneous",
-        ],
-        Field(description="query by category"),
-    ]
-    description: Annotated[str, Field(description="query by description")] = ""
-    currency: Annotated[str, Field(description="query by currency")] = None
+    # sourceOrPayee: Annotated[str, Field(description="query sourceOrPayee column")] = None
+    # category: Annotated[
+    #     Literal[
+    #         "Grocery",
+    #         "FoodAndDining",
+    #         "RentAndMortgage",
+    #         "Utilities",
+    #         "Transportation",
+    #         "Entertainment",
+    #         "Healthcare",
+    #         "Clothing",
+    #         "Education",
+    #         "Miscellaneous",
+    #     ],
+    #     Field(description="query by category"),
+    # ]
+    # description: Annotated[str, Field(description="query by description")] = None
+    # currency: Annotated[str, Field(description="query by currency")] = None
 
 
 async def query_user_transaction(input: QueryUserTransaction, user_id: str):
@@ -86,7 +86,6 @@ async def query_user_transaction(input: QueryUserTransaction, user_id: str):
             },
         },
     )
-
     
     filtered_transactions = []
     count = 0
@@ -101,15 +100,15 @@ async def query_user_transaction(input: QueryUserTransaction, user_id: str):
     average_expense = 0
     average_income = 0
     for transaction in db_transactions:
-        # filter transaction
-        if input.sourceOrPayee and input.sourceOrPayee.lower() != transaction.sourceOrPayee.lower():
-            continue
-        if input.category and input.category != transaction.category:
-            continue
-        if input.description and transaction.description.lower().find(input.description.lower()) == -1:
-            continue
-        if input.currency and input.currency.lower() != transaction.currency.lower():
-            continue
+        # # filter transaction
+        # if input.sourceOrPayee and input.sourceOrPayee != transaction.sourceOrPayee:
+        #     continue
+        # if input.category and input.category != transaction.category:
+        #     continue
+        # if input.description and transaction.description.find(input.description) == -1:
+        #     continue
+        # if input.currency and input.currency != transaction.currency:
+        #     continue
         transaction.createdAt = transaction.createdAt.strftime("%Y%m%d")
         transaction.updatedAt = transaction.updatedAt.strftime("%Y%m%d")
         

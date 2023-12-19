@@ -23,6 +23,7 @@ ipython = "^8.18.1"
 streamlit-javascript = "^0.1.5"
 openai = "^1.5.0"
 instructor = "^0.4.4"
+tiktoken = "^0.5.2"
 
 
 [build-system]

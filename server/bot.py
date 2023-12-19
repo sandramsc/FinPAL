@@ -42,13 +42,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 I'm finPAL, your financial helper.
 I can analyze your financial data and help you with your financial goals.
 You can start by uploading your financial data.
-Or
-You can sync your financial data through Plaid to us.
 I can analyze your spending, income, help you save money and attain your financial goal.
 I can also generate graphs and help you visualize your financial data.
-
-Oh wait, I can also create a reminder to remind you about your budget.
-Want to get real time update on any financial news ? stock price ? I can help you.
 """,
     )
     # create user_id in DB
