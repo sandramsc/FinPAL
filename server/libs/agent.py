@@ -86,7 +86,7 @@ class Agent:
         return parsed_messages
     
     async def truncate_messages(self, messages: list[Message])->list[Message]:
-        pass
+        return messages
 
     async def input_parser(self, input: Message) -> Message:
         # TODO: dynamically generate prompt for the multimodal prompt
