@@ -69,7 +69,7 @@ export const feedback = [
     img: feedimg3,
   },
   {
-    id: "feedback-3",
+    id: "feedback-4",
     content:
       "Simplify expense management with streamlined automation, minimizing errors, boosting productivity, and saving 75% of team time.",
     name: "Manage Expenses",
@@ -182,7 +182,7 @@ export const socialMedia = [
     link: "#",
   },
   {
-    id: "social-media-4",
+    id: "social-media-2",
     icon: slack,
     link: "#",
   },

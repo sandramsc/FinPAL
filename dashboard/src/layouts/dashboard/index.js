@@ -123,13 +123,13 @@ function Dashboard() {
               <Card>
                 <VuiBox sx={{ height: "100%" }}>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Sales Overview
+                    My Activity
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
-                      +5% more{" "}
+                      Saved +5% more{" "}
                       <VuiTypography variant="button" color="text" fontWeight="regular">
-                        in 2021
+                        in 2023
                       </VuiTypography>
                     </VuiTypography>
                   </VuiBox>
