@@ -7,8 +7,8 @@ import {
   LinearScale,
 
 } from 'chart.js';
-
 import { Bar } from 'react-chartjs-2';
+import { useParams } from 'react-router-dom';
 
 ChartJS.register(
   BarElement,
@@ -21,6 +21,7 @@ const LABELS = ["January", "February", "March", "April", "May", "June", "July", 
 
 
 const BarChart = () => {
+  const {user_id: userId, start_date: startDate, end_date: endDate} = useParams()
   const [chart, setChart] = useState({})
 
   // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
@@ -49,7 +50,6 @@ const BarChart = () => {
 
         // remove 0 at the left
         const labelIndex = Number(transactionDate.slice(4, 6)).toString()
-        console.log("🚀 ~ file: BarChartt.js:41 ~ fetchTransactions ~ labelIndex:", labelIndex)
 
         incomeDataset[labelIndex] += amountIn
         expenseDataset[labelIndex] += amountOut
@@ -60,7 +60,7 @@ const BarChart = () => {
         })
       }
     }
-    fetchTransactions({ startDate: "20230101", endDate: "20231212", userId: "test" });
+    fetchTransactions({ startDate: startDate, endDate: endDate, userId: userId });
   },[])
 
   // useEffect(() => {
