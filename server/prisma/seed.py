@@ -18,8 +18,8 @@ db.connect()
 res2 = db.transaction.create_many(
     data=[
         {
-            "amountIn": "100",
-            "amountOut": "0",
+            "amountOut": "1020",
+            "amountIn": "0",
             "category": "Miscellaneous",
             "description": "test transaction",
             "sourceOrPayee": "wallmart",
@@ -28,8 +28,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "50",
-            "amountOut": "0",
+            "amountOut": "502",
+            "amountIn": "0",
             "category": "Transportation",
             "description": "bus fare",
             "sourceOrPayee": "public transport",
@@ -38,8 +38,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "120",
-            "amountOut": "0",
+            "amountOut": "1202",
+            "amountIn": "0",
             "category": "Entertainment",
             "description": "movie night",
             "sourceOrPayee": "cinema",
@@ -48,8 +48,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "200",
-            "amountOut": "0",
+            "amountOut": "2020",
+            "amountIn": "0",
             "category": "RentAndMortgage",
             "description": "monthly rent",
             "sourceOrPayee": "landlord",
@@ -58,8 +58,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "30",
-            "amountOut": "0",
+            "amountOut": "302",
+            "amountIn": "0",
             "category": "FoodAndDining",
             "description": "takeout dinner",
             "sourceOrPayee": "local restaurant",
@@ -68,8 +68,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "80",
-            "amountOut": "0",
+            "amountOut": "802",
+            "amountIn": "0",
             "category": "Utilities",
             "description": "electricity bill",
             "sourceOrPayee": "utility company",
@@ -78,8 +78,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "25",
-            "amountOut": "0",
+            "amountOut": "235",
+            "amountIn": "0",
             "category": "Clothing",
             "description": "new socks",
             "sourceOrPayee": "clothing store",
@@ -88,8 +88,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "40",
-            "amountOut": "0",
+            "amountOut": "403",
+            "amountIn": "0",
             "category": "Healthcare",
             "description": "prescription medicine",
             "sourceOrPayee": "pharmacy",
@@ -98,8 +98,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "150",
-            "amountOut": "0",
+            "amountOut": "1350",
+            "amountIn": "0",
             "category": "Education",
             "description": "textbooks",
             "sourceOrPayee": "bookstore",
@@ -108,8 +108,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "60",
-            "amountOut": "0",
+            "amountOut": "610",
+            "amountIn": "0",
             "category": "Miscellaneous",
             "description": "gift for a friend",
             "sourceOrPayee": "gift shop",
@@ -118,8 +118,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "90",
-            "amountOut": "0",
+            "amountOut": "910",
+            "amountIn": "0",
             "category": "Grocery",
             "description": "monthly groceries",
             "sourceOrPayee": "supermarket",
@@ -128,8 +128,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "70",
-            "amountOut": "0",
+            "amountOut": "710",
+            "amountIn": "0",
             "category": "Transportation",
             "description": "gasoline",
             "sourceOrPayee": "gas station",
@@ -138,8 +138,8 @@ res2 = db.transaction.create_many(
             "userId": "test",
         },
         {
-            "amountIn": "100",
-            "amountOut": "0",
+            "amountOut": "1010",
+            "amountIn": "0",
             "category": "Entertainment",
             "description": "concert tickets",
             "sourceOrPayee": "ticket vendor",
