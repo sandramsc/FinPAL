@@ -54,12 +54,9 @@ import { FaShoppingCart } from "react-icons/fa";
 
 // Data
 import LineChart from "examples/Charts/LineCharts/LineChart";
-//import BarChart from "examples/Charts/BarCharts/BarChart";
 import BarChartt from "examples/Charts/BarCharts/BarChartt";
 import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
-//import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
-//import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
 
 function Dashboard() {
   const { gradients } = colors;
@@ -163,12 +160,8 @@ function Dashboard() {
                     />
 
                   </VuiBox>
-
-                  
-
-            
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Active Users
+                    Active Transactions
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
@@ -192,14 +185,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <IoWallet color="#fff" size="12px" />
+                          <IoWallet color="#fff" size="18px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Users
+                          Utilities
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        32,984
+                        $120
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -216,14 +209,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <IoIosRocket color="#fff" size="12px" />
+                          <IoIosRocket color="#fff" size="18px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Clicks
+                          Clothing
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,42M
+                        $80
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -240,14 +233,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <FaShoppingCart color="#fff" size="12px" />
+                          <FaShoppingCart color="#fff" size="18px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Sales
+                          Groceries
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,400$
+                        $240
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -264,14 +257,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <IoBuild color="#fff" size="12px" />
+                          <IoBuild color="#fff" size="18px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Items
+                          Education
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        320
+                        $320
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
