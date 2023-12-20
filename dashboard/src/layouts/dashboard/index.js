@@ -214,7 +214,7 @@ function Dashboard() {
                           <IoIosRocket color="#fff" size="18px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Clothing
+                          Entertainment
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
