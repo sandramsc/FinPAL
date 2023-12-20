@@ -45,7 +45,7 @@ function Tables() {
           <Card>
             <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="22px">
               <VuiTypography variant="lg" color="white">
-                Authors table
+                Detailed Transactions
               </VuiTypography>
             </VuiBox>
             <VuiBox
@@ -69,7 +69,7 @@ function Tables() {
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
-              Projects table
+              Subscriptions
             </VuiTypography>
           </VuiBox>
           <VuiBox

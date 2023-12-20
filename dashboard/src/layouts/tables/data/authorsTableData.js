@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 /* eslint-disable react/prop-types */
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -64,21 +46,21 @@ function Function({ job, org }) {
 
 export default {
   columns: [
-    { name: "author", align: "left" },
+    { name: "client", align: "left" },
     { name: "function", align: "left" },
     { name: "status", align: "center" },
-    { name: "employed", align: "center" },
-    { name: "action", align: "center" },
+    { name: "date", align: "center" },
+    { name: "income", align: "center" },
   ],
 
   rows: [
     {
-      author: <Author image={avatar4} name="Esthera Jackson" email="esthera@simmmple.com" />,
+      client: <Author image={avatar4} name="Esthera Jackson" email="esthera@simmmple.com" />,
       function: <Function job="Manager" org="Organization" />,
       status: (
         <VuiBadge
           variant="standard"
-          badgeContent="Online"
+          badgeContent="Done"
           color="success"
           size="xs"
           container
@@ -90,24 +72,24 @@ export default {
           })}
         />
       ),
-      employed: (
+      date: (
         <VuiTypography variant="caption" color="white" fontWeight="medium">
           23/04/18
         </VuiTypography>
       ),
-      action: (
+      income: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          Edit
+          $3200
         </VuiTypography>
       ),
     },
     {
-      author: <Author image={avatar2} name="Alexa Liras" email="alexa@simmmple.com" />,
+      client: <Author image={avatar2} name="Alexa Liras" email="alexa@simmmple.com" />,
       function: <Function job="Programator" org="Developer" />,
       status: (
         <VuiBadge
           variant="standard"
-          badgeContent="Offline"
+          badgeContent="Open"
           size="xs"
           container
           sx={({ palette: { white }, borders: { borderRadius, borderWidth } }) => ({
@@ -118,24 +100,24 @@ export default {
           })}
         />
       ),
-      employed: (
+      date: (
         <VuiTypography variant="caption" color="white" fontWeight="medium">
           11/01/19
         </VuiTypography>
       ),
-      action: (
+      income: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          Edit
+          $500
         </VuiTypography>
       ),
     },
     {
-      author: <Author image={avatar3} name="Laurent Michael" email="laurent@simmmple.com" />,
+      client: <Author image={avatar3} name="Laurent Michael" email="laurent@simmmple.com" />,
       function: <Function job="Executive" org="Projects" />,
       status: (
         <VuiBadge
           variant="standard"
-          badgeContent="Online"
+          badgeContent="Done"
           color="success"
           size="xs"
           container
@@ -147,81 +129,53 @@ export default {
           })}
         />
       ),
-      employed: (
+      date: (
         <VuiTypography variant="caption" color="white" fontWeight="medium">
           19/09/17
         </VuiTypography>
       ),
-      action: (
+      income: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          Edit
+          $1280
         </VuiTypography>
       ),
     },
     {
-      author: <Author image={avatar1} name="Freduardo Hill" email="freduardo@simmmple.com" />,
-      function: <Function job="Programator" org="Developer" />,
-      status: (
-        <VuiBadge
-          variant="standard"
-          badgeContent="Online"
-          color="success"
-          size="xs"
-          container
-          sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
-            background: success.main,
-            border: `${borderWidth[1]} solid ${success.main}`,
-            borderRadius: borderRadius.md,
-            color: white.main,
-          })}
-        />
-      ),
-      employed: (
-        <VuiTypography variant="caption" color="white" fontWeight="medium">
-          24/12/08
-        </VuiTypography>
-      ),
-      action: (
-        <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          Edit
-        </VuiTypography>
-      ),
-    },
-    {
-      author: <Author image={avatar5} name="Daniel Thomas" email="daniel@simmmple.com" />,
+      client: <Author image={avatar5} name="Daniel Thomas" email="daniel@simmmple.com" />,
       function: <Function job="Manager" org="Executive" />,
       status: (
         <VuiBadge
-          variant="standard"
-          badgeContent="Offline"
-          size="xs"
-          container
-          sx={({ palette: { white }, borders: { borderRadius, borderWidth } }) => ({
-            background: "unset",
-            border: `${borderWidth[1]} solid ${white.main}`,
-            borderRadius: borderRadius.md,
-            color: white.main,
-          })}
-        />
+        variant="standard"
+        badgeContent="Pending"
+        color="warning"
+        size="xs"
+        container
+        sx={({ palette: { white, warning }, borders: { borderRadius, borderWidth } }) => ({
+          background: warning.main,
+          border: `${borderWidth[1]} solid ${warning.main}`,
+          borderRadius: borderRadius.md,
+          color: white.main,
+        })}
+      />
       ),
-      employed: (
+      date: (
         <VuiTypography variant="caption" color="white" fontWeight="medium">
           04/10/21
         </VuiTypography>
       ),
-      action: (
+      income: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          Edit
+          $900
         </VuiTypography>
       ),
     },
     {
-      author: <Author image={avatar6} name="Mark Wilson" email="mark@simmmple.com" />,
+      client: <Author image={avatar6} name="Mark Wilson" email="mark@simmmple.com" />,
       function: <Function job="Programtor" org="Developer" />,
       status: (
         <VuiBadge
           variant="standard"
-          badgeContent="Offline"
+          badgeContent="Open"
           size="xs"
           container
           sx={({ palette: { white }, borders: { borderRadius, borderWidth } }) => ({
@@ -232,14 +186,14 @@ export default {
           })}
         />
       ),
-      employed: (
+      date: (
         <VuiTypography variant="caption" color="white" fontWeight="medium">
           14/09/20
         </VuiTypography>
       ),
-      action: (
+      income: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          Edit
+          $3000
         </VuiTypography>
       ),
     },
