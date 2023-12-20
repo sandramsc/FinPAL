@@ -40,7 +40,6 @@ import colors from "assets/theme/base/colors";
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
-import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
 
 // React icons
 import { IoIosRocket } from "react-icons/io";
@@ -102,14 +101,11 @@ function Dashboard() {
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing="18px">
-            <Grid item xs={12} lg={12} xl={5}>
+            <Grid item xs={12} lg={12} xl={8}>
               <WelcomeMark />
             </Grid>
-            <Grid item xs={12} lg={6} xl={3}>
-              <SatisfactionRate />
-            </Grid>
             <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking />
+              <SatisfactionRate />
             </Grid>
           </Grid>
         </VuiBox>

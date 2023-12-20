@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import AppBar from "@mui/material/AppBar";
 // @mui material components
 import Card from "@mui/material/Card";
@@ -23,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 // Images
-import burceMars from "assets/images/avatar-simmmple.png";
+import burceMars from "assets/images/avatar6.png";
 // Vision UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import VuiAvatar from "components/VuiAvatar";
@@ -143,8 +125,7 @@ function Header() {
                 sx={{ background: "transparent", display: "flex", justifyContent: "flex-end" }}
               >
                 <Tab label="OVERVIEW" icon={<IoCube color="white" size="16px" />} />
-                <Tab label="TEAMS" icon={<IoDocument color="white" size="16px" />} />
-                <Tab label="PROJECTS" icon={<IoBuild color="white" size="16px" />} />
+                <Tab label="RECEIPTS" icon={<IoDocument color="white" size="16px" />} />
               </Tabs>
             </AppBar>
           </Grid>
