@@ -7,8 +7,8 @@ import {
   LinearScale,
 
 } from 'chart.js';
-
 import { Bar } from 'react-chartjs-2';
+import { useParams } from 'react-router-dom';
 
 ChartJS.register(
   BarElement,
@@ -21,6 +21,8 @@ const LABELS = ["January", "February", "March", "April", "May", "June", "July", 
 
 
 const BarChart = () => {
+  const {user_id: userId, start_date: startDate, end_date: endDate} = useParams()
+  console.log("🚀 ~ file: BarChartt.js:25 ~ BarChart ~ userId:", userId)
   const [chart, setChart] = useState({})
 
   // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
@@ -31,6 +33,7 @@ const BarChart = () => {
 
       const response = await fetch(`${baseUrl}/?start_date=${startDate}&end_date=${endDate}&user_id=${userId}`);
       const data = await response.json();
+      console.log("🚀 ~ file: BarChartt.js:35 ~ fetchTransactions ~ data:", data)
 
       let expenseDataset = new Array(12).fill(0)
       let incomeDataset = new Array(12).fill(0)
@@ -49,7 +52,6 @@ const BarChart = () => {
 
         // remove 0 at the left
         const labelIndex = Number(transactionDate.slice(4, 6)).toString()
-        console.log("🚀 ~ file: BarChartt.js:41 ~ fetchTransactions ~ labelIndex:", labelIndex)
 
         incomeDataset[labelIndex] += amountIn
         expenseDataset[labelIndex] += amountOut
@@ -60,7 +62,7 @@ const BarChart = () => {
         })
       }
     }
-    fetchTransactions({ startDate: "20230101", endDate: "20231212", userId: "test" });
+    fetchTransactions({ startDate: startDate, endDate: endDate, userId: userId });
   },[])
 
   // useEffect(() => {
@@ -87,7 +89,6 @@ const BarChart = () => {
   //   fetchCoins()
   // }, [baseUrl, proxyUrl, apiKey])
 
-  console.log("chart", chart);
   const data = {
     labels: LABELS,
     datasets: [{
