@@ -16,11 +16,12 @@ ChartJS.register(
   LinearScale,
 );
 
-const baseUrl = "https://finpal-alpha.23.94.26.231.sslip.io/transactions";
+const baseUrl = "https://api.coinranking.com/v2/coins/?limit=10";
+const apiKey = "coinrankinga0d622c9c87f41f10b19b797ba4f932fa68aef3daff45766";
 const LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
-const BarChart = () => {
+const BarChartt = () => {
   const {user_id: userId, start_date: startDate, end_date: endDate} = useParams()
   console.log("🚀 ~ file: BarChartt.js:25 ~ BarChart ~ userId:", userId)
   const [chart, setChart] = useState({})
@@ -31,7 +32,7 @@ const BarChart = () => {
   useEffect(() => {
     const fetchTransactions = async ({ startDate, endDate, userId }) => {
 
-      const response = await fetch(`${baseUrl}/?start_date=${startDate}&end_date=${endDate}&user_id=${userId}`);
+      const response = await fetch(`${baseUrl}${apiKey}/?start_date=${startDate}&end_date=${endDate}&user_id=${userId}`);
       const data = await response.json();
       console.log("🚀 ~ file: BarChartt.js:35 ~ fetchTransactions ~ data:", data)
 
@@ -156,4 +157,4 @@ const BarChart = () => {
   )
 }
 
-export default BarChart
+export default BarChartt

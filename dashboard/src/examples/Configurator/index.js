@@ -209,24 +209,13 @@ function Configurator() {
               variant="contained"
               fullWidth
             >
-              FREE DOWNLOAD
+             DOWNLOAD THE APP
             </VuiButton>
           </VuiBox>
-          <VuiButton
-            component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/vision-ui-dashboard/"
-            target="_blank"
-            rel="noreferrer"
-            color="info"
-            variant="outlined"
-            fullWidth
-          >
-            VIEW DOCUMENTATION
-          </VuiButton>
         </VuiBox>
         <VuiBox display="flex" justifyContent="center">
           <GitHubButton
-            href="https://github.com/creativetimofficial/vision-ui-dashboard-react"
+            href="https://github.com/sandramsc/FinPAL"
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"

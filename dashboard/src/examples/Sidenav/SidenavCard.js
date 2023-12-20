@@ -41,12 +41,12 @@ function SidenavCard({ color, ...rest }) {
           </VuiTypography>
           <VuiBox mb={1.825} mt={-1}>
             <VuiTypography variant="caption" color="white" fontWeight="regular">
-              Please check our docs
+              contact our customer support
             </VuiTypography>
           </VuiBox>
           <VuiButton
             component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/vision-ui-dashboard/"
+            href="https:github.com/sandramsc/FinPAL"
             target="_blank"
             rel="noreferrer"
             size="small"
@@ -68,7 +68,7 @@ function SidenavCard({ color, ...rest }) {
             })}
             fullWidth
           >
-            DOCUMENTATION
+            SUBMIT  A TICKET
           </VuiButton>
         </VuiBox>
       </CardContent>

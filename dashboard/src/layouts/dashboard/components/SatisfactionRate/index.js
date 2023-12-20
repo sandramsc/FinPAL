@@ -19,7 +19,7 @@ const SatisfactionRate = () => {
 					Satisfaction Rate
 				</VuiTypography>
 				<VuiTypography variant='button' color='text' fontWeight='regular' mb='20px'>
-					From all projects
+					From all users
 				</VuiTypography>
 				<VuiBox sx={{ alignSelf: 'center', justifySelf: 'center', zIndex: '-1' }}>
 					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
@@ -78,7 +78,7 @@ const SatisfactionRate = () => {
 							95%
 						</VuiTypography>
 						<VuiTypography color='text' variant='caption' fontWeight='regular'>
-							Based on likes
+							Based on ratings
 						</VuiTypography>
 					</VuiBox>
 					<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>

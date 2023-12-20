@@ -47,7 +47,7 @@ function Function({ job, org }) {
 export default {
   columns: [
     { name: "client", align: "left" },
-    { name: "function", align: "left" },
+    { name: "company", align: "left" },
     { name: "status", align: "center" },
     { name: "date", align: "center" },
     { name: "income", align: "center" },
@@ -56,7 +56,7 @@ export default {
   rows: [
     {
       client: <Author image={avatar4} name="Esthera Jackson" email="esthera@simmmple.com" />,
-      function: <Function job="Manager" org="Organization" />,
+      company: <Function job="Manager" org="Netflix" />,
       status: (
         <VuiBadge
           variant="standard"
@@ -85,7 +85,7 @@ export default {
     },
     {
       client: <Author image={avatar2} name="Alexa Liras" email="alexa@simmmple.com" />,
-      function: <Function job="Programator" org="Developer" />,
+      company: <Function job="Programator" org="Stripe" />,
       status: (
         <VuiBadge
           variant="standard"
@@ -113,7 +113,7 @@ export default {
     },
     {
       client: <Author image={avatar3} name="Laurent Michael" email="laurent@simmmple.com" />,
-      function: <Function job="Executive" org="Projects" />,
+      company: <Function job="Executive" org="HubSpot" />,
       status: (
         <VuiBadge
           variant="standard"
@@ -142,7 +142,7 @@ export default {
     },
     {
       client: <Author image={avatar5} name="Daniel Thomas" email="daniel@simmmple.com" />,
-      function: <Function job="Manager" org="Executive" />,
+      company: <Function job="Manager" org="Webflow" />,
       status: (
         <VuiBadge
         variant="standard"
@@ -171,7 +171,7 @@ export default {
     },
     {
       client: <Author image={avatar6} name="Mark Wilson" email="mark@simmmple.com" />,
-      function: <Function job="Programtor" org="Developer" />,
+      company: <Function job="Programtor" org="Apple" />,
       status: (
         <VuiBadge
           variant="standard"

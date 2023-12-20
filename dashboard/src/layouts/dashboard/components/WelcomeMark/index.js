@@ -51,7 +51,7 @@ const WelcomeMark = () => {
             },
           }}
         >
-          Tap to record
+          Tap to chat
           <Icon sx={{ fontWeight: "bold", ml: "5px" }}>arrow_forward</Icon>
         </VuiTypography>
       </VuiBox>
