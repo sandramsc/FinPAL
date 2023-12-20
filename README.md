@@ -31,7 +31,7 @@ a web tool that ..
 View the Demo [App](https://finpal.vercel.app/)
 
 ## Screenshots
-
+![firstscreenshot](https://github.com/sandramsc/FinPAL/assets/19821445/e2b1222f-7cc9-4526-91a8-367ed0ca7282)
 ## Technology Stack
 
 | Technology  | Description              |
