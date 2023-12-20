@@ -39,8 +39,6 @@ import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
-import Projects from "layouts/dashboard/components/Projects";
-import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
 import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
 
@@ -76,7 +74,7 @@ function Dashboard() {
                 icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
+            <Grid item xs={18} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "today's users" }}
                 count="2,300"
@@ -117,7 +115,7 @@ function Dashboard() {
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={7}>
+            <Grid item xs={12} lg={6} xl={12}>
               <Card>
                 <VuiBox sx={{ height: "100%" }}>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
@@ -140,8 +138,12 @@ function Dashboard() {
                 </VuiBox>
               </Card>
             </Grid>
-            <Grid item xs={12} lg={6} xl={5}>
-              <Card>
+          </Grid>
+        </VuiBox>
+        
+        <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
+          <Grid item xs={12} md={6} lg={22}>
+            <Card>
                 <VuiBox>
                   <VuiBox 
                     className="App"
@@ -271,15 +273,6 @@ function Dashboard() {
                   </Grid>
                 </VuiBox>
               </Card>
-            </Grid>
-          </Grid>
-        </VuiBox>
-        <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
           </Grid>
         </Grid>
       </VuiBox>
