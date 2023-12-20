@@ -1,0 +1,24 @@
+name: Continuous Integration
+on:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  tests-server:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: ENVFILE
+        uses: alekangelov/secret-envfile@v1
+        with:
+          content: ${{ secrets.ENVFILE_SERVER }}
+          filename: .env
+      # - run: |
+      #     pip install poetry==1.6.1
+      #     poetry install
+      #     poetry run prisma generate
+      # - run: |
+      #     poetry run pytest

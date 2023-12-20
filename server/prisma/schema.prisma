@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider             = "prisma-client-py"
+  interface            = "sync"
+  recursive_type_depth = 5
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("PRISMA_DATABASE_URL")
+  directUrl = env("PRISMA_DIRECT_URL")
+}
+
+model User {
+  id               String        @id @default(uuid())
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @default(now()) @updatedAt
+  telegramThread   Thread?       @relation(fields: [telegramThreadId], references: [id])
+  telegramThreadId String?
+  telegramId       String?       @unique
+  transactions     Transaction[]
+}
+
+model Thread {
+  id        String         @id @default(uuid())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now()) @updatedAt
+  platform  ThreadPlatform
+  User      User[]
+  messages  Message[]
+}
+
+enum ThreadPlatform {
+  telegram
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  text      String?  @default("")
+  photo     String?
+  isBot     Boolean
+  Thread    Thread?  @relation(fields: [threadId], references: [id])
+  threadId  String?
+}
+
+model Transaction {
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+  amountOut       String?
+  amountIn        String?
+  currency        String?
+  sourceOrPayee   String?
+  category        Category @default(Miscellaneous)
+  description     String?
+  transactionDate String?
+  User            User?    @relation(fields: [userId], references: [id])
+  userId          String?
+}
+
+enum Category {
+  Grocery
+  FoodAndDining
+  RentAndMortgage
+  Utilities
+  Transportation
+  Entertainment
+  Healthcare
+  Clothing
+  Education
+  Miscellaneous
+}

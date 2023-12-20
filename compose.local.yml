@@ -1,0 +1,10 @@
+services:
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./server:/app
+    ports:
+      - 8000:8000
+  # TODO: add client compose
