@@ -68,7 +68,7 @@ function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "today's money", fontWeight: "regular" }}
+                title={{ text: "total income", fontWeight: "regular" }}
                 count="$53,000"
                 percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
@@ -76,7 +76,7 @@ function Dashboard() {
             </Grid>
             <Grid item xs={18} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "today's users" }}
+                title={{ text: "total expenses" }}
                 count="2,300"
                 percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
@@ -84,7 +84,7 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "new clients" }}
+                title={{ text: "investments" }}
                 count="+3,462"
                 percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: <IoDocumentText size="22px" color="white" /> }}
@@ -92,7 +92,7 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "total sales" }}
+                title={{ text: "total savings" }}
                 count="$103,430"
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
@@ -163,7 +163,7 @@ function Dashboard() {
 
                   </VuiBox>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Active Transactions
+                  My Cryptocurrency Profile
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
@@ -214,7 +214,7 @@ function Dashboard() {
                           <IoIosRocket color="#fff" size="18px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Clothing
+                          Entertainment
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
