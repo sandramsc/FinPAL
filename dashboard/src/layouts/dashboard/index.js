@@ -18,8 +18,8 @@
 
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import { Card, LinearProgress, Stack } from "@mui/material";
+import { Card, Stack } from "@mui/material";
+import '../../App.css'
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -54,11 +54,12 @@ import { FaShoppingCart } from "react-icons/fa";
 
 // Data
 import LineChart from "examples/Charts/LineCharts/LineChart";
-import BarChart from "examples/Charts/BarCharts/BarChart";
+//import BarChart from "examples/Charts/BarCharts/BarChart";
+import BarChartt from "examples/Charts/BarCharts/BarChartt";
 import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
-import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
-import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
+//import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
+//import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
 
 function Dashboard() {
   const { gradients } = colors;
@@ -145,9 +146,10 @@ function Dashboard() {
             <Grid item xs={12} lg={6} xl={5}>
               <Card>
                 <VuiBox>
-                  <VuiBox
+                  <VuiBox 
+                    className="App"
                     mb="24px"
-                    height="220px"
+                    height="420px"
                     sx={{
                       background: linearGradient(
                         cardContent.main,
@@ -157,11 +159,14 @@ function Dashboard() {
                       borderRadius: "20px",
                     }}
                   >
-                    <BarChart
-                      barChartData={barChartDataDashboard}
-                      barChartOptions={barChartOptionsDashboard}
+                    <BarChartt
                     />
+
                   </VuiBox>
+
+                  
+
+            
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
                     Active Users
                   </VuiTypography>
