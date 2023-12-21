@@ -16,18 +16,13 @@ ChartJS.register(
   LinearScale,
 );
 
-const baseUrl = "https://finpal-alpha.23.94.26.231.sslip.io";
-const apiKey = "coinrankinga0d622c9c87f41f10b19b797ba4f932fa68aef3daff45766";
-const LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+const baseUrl = "https://finpal-alpha.23.94.26.231.sslip.io";
+const LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 const BarChartt = () => {
   const {user_id: userId, start_date: startDate, end_date: endDate} = useParams()
-  console.log("🚀 ~ file: BarChartt.js:26 ~ BarChartt ~ endDate:", endDate)
-  console.log("🚀 ~ file: BarChartt.js:26 ~ BarChartt ~ startDate:", startDate)
-  console.log("🚀 ~ file: BarChartt.js:26 ~ BarChartt ~ userId:", userId)
   const [chart, setChart] = useState({})
-
   // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
   // var apiKey = "coinrankinga0d622c9c87f41f10b19b797ba4f932fa68aef3daff45766";
 
@@ -36,8 +31,6 @@ const BarChartt = () => {
 
       const response = await fetch(`${baseUrl}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
       const data = await response.json();
-      console.log("🚀 ~ file: BarChartt.js:35 ~ fetchTransactions ~ data:", data)
-
       let expenseDataset = new Array(12).fill(0)
       let incomeDataset = new Array(12).fill(0)
       for (const transaction of data.transactions) {
