@@ -3,7 +3,6 @@
 # This program is dedicated to the public domain under the CC0 license.
 
 
-
 import logging
 from dotenv import load_dotenv
 
@@ -32,6 +31,7 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
+
 # Define a few command handlers. These usually take the two arguments update and
 # context.
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -48,8 +48,9 @@ I can also generate graphs and help you visualize your financial data.
     )
     # create user_id in DB
     from libs.prisma import db
+
     thread_id = update.effective_chat.id
-    print("userid threadid",thread_id, user.id)
+    print("userid threadid", thread_id, user.id)
     db_user = db.user.upsert(
         where={
             "telegramId": str(user.id),
@@ -59,14 +60,12 @@ I can also generate graphs and help you visualize your financial data.
                 "telegramThread": {
                     "create": {
                         "platform": "telegram",
-                        "id":str(thread_id),
+                        "id": str(thread_id),
                     }
                 },
                 "telegramId": str(user.id),
             },
-            "update": {
-                "telegramId": str(user.id)
-            },
+            "update": {"telegramId": str(user.id)},
         },
     )
     # we will continue tracking the state of the user in the DB
@@ -82,8 +81,8 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
     await update.message.reply_text(update.message.text)
 
+
 async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    
     # thread id is similar to user id in this case
     user_id = update.effective_user.id
     thread_id = update.effective_chat.id
@@ -91,7 +90,7 @@ async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message = update.effective_message.text
     photo = update.effective_message.photo
     from telegram.constants import ChatAction
-    
+
     await context.bot.send_chat_action(chat_id=thread_id, action=ChatAction.TYPING)
 
     if len(photo) > 0:
@@ -103,20 +102,22 @@ async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # # create an empty message
     # loading = await update.message.reply_markdown(text="_typing_ _..._")
     from libs.prisma import db
+
     db_user = db.user.find_unique(
         where={
             "telegramId": str(user_id),
         }
     )
-    
+
     # retrieve today datetime for bot context
-    
+
     from datetime import datetime
+
     # datetime object containing current date and time
     now = datetime.now()
     # dd/mm/YY H:M:S
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    
+
     SYSTEM_PROMPT = f"""
 You are a helpful assistant.
 Your name is FinPal.
@@ -129,8 +130,11 @@ You can also generate graphs and help user visualize their financial data.
 You want to collect user transaction data, because with more data you can create analyze their finance better and create a better budget planning.
 Today datetime is {dt_string}
     """
-    
-    agent = Agent(thread_id=str(thread_id), user_id=db_user.id, system_prompt=SYSTEM_PROMPT)
+
+    await context.bot.send_chat_action(chat_id=thread_id, action=ChatAction.TYPING)
+    agent = Agent(
+        thread_id=str(thread_id), user_id=db_user.id, system_prompt=SYSTEM_PROMPT
+    )
     # initialize truera
     # Imports main tools:
     from trulens_eval import Feedback, OpenAI as fOpenAI, Tru
@@ -139,27 +143,38 @@ Today datetime is {dt_string}
 
     from libs.typings import Message
 
-    streaming = agent.run(
-        input=Message(
-            content=message, role="user", photo=photo if type(photo) == bytearray else None
+    # using this to wrap async streaming agent into async agent
+    async def agent_wrapper(message: str):
+        streaming = agent.run(
+            input=Message(
+                content=message,
+                role="user",
+                photo=photo if type(photo) == bytearray else None,
+            )
         )
-    )
-    # from telegram.constants import ParseMode
-    async for progress in streaming:
-        print("progress",progress)
-        await update.message.reply_markdown(text=progress.content)
-
+        result = ""
+        # from telegram.constants import ParseMode
+        async for progress in streaming:
+            print("progress", progress)
+            await update.message.reply_markdown(text=progress.content)
+            result = progress.content
+        return result
+    
     # initialize feedback
     # Initialize OpenAI-based feedback function collection class:
     fopenai = fOpenAI()
 
     # Define a relevance function from openai
     f_relevance = Feedback(fopenai.relevance).on_input_output()
+    # f_conciseness = Feedback(fopenai.conciseness).on_input_output()
+    # f_correctness = Feedback(fopenai.correctness).on_input_output()
 
     from trulens_eval import TruBasicApp
 
     tru_llm_standalone_recorder = TruBasicApp(
-        agent.run, app_id="finPal", feedbacks=[f_relevance]
+        agent_wrapper,
+        app_id="finPal",
+        feedbacks=[f_relevance],
     )
 
     with tru_llm_standalone_recorder as recording:

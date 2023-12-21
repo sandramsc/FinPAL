@@ -75,6 +75,7 @@ function Dashboard() {
 
       const response = await fetch(`${SERVER_BASE_URL}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
       const data = await response.json();
+      console.log("🚀 ~ file: index.js:78 ~ fetchTransactions ~ data:", data)
 
       let expenseDataset = new Array(12).fill(0)
       let incomeDataset = new Array(12).fill(0)
