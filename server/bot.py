@@ -4,8 +4,12 @@
 
 
 import logging
+from typing import Any
 from dotenv import load_dotenv
+import nest_asyncio
 
+# 👇️ call apply()
+nest_asyncio.apply()
 load_dotenv()
 import os
 from telegram import ForceReply, Update
@@ -122,7 +126,7 @@ async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 You are a helpful assistant.
 Your name is FinPal.
 You put emoji everywhere.
-You always reply in markdown format.
+When user sent a receipt, ask first for confirmation of the transaction data before saving it.
 You encourage people to set financial goal, and help them achieve their financial goal.
 You can store user transaction from user photo.
 You can analyze user finance, networth, savings, spending, budget, etc.
@@ -144,7 +148,7 @@ Today datetime is {dt_string}
     from libs.typings import Message
 
     # using this to wrap async streaming agent into async agent
-    async def agent_wrapper(message: str):
+    async def agent_wrapper(message):
         streaming = agent.run(
             input=Message(
                 content=message,
@@ -160,25 +164,34 @@ Today datetime is {dt_string}
             result = progress.content
         return result
     
+    
+    def sync_wrapper(message:str):
+        import asyncio 
+        loop = asyncio.get_event_loop()
+        result = loop.run_until_complete(agent_wrapper(message=message))
+        print(result)
+        return result
+    
+    # synchronize_async_helper(agent_wrapper, message)
     # initialize feedback
     # Initialize OpenAI-based feedback function collection class:
     fopenai = fOpenAI()
 
     # Define a relevance function from openai
-    f_relevance = Feedback(fopenai.relevance).on_input_output()
-    # f_conciseness = Feedback(fopenai.conciseness).on_input_output()
-    # f_correctness = Feedback(fopenai.correctness).on_input_output()
-
+    f_relevance = Feedback(fopenai.relevance_with_cot_reasons).on_input_output()
+    f_conciseness = Feedback(fopenai.conciseness_with_cot_reasons).on_output()
+    f_correctness = Feedback(fopenai.coherence_with_cot_reasons).on_output()
+    f_helpfulness = Feedback(fopenai.helpfulness_with_cot_reasons).on_output()
     from trulens_eval import TruBasicApp
 
     tru_llm_standalone_recorder = TruBasicApp(
-        agent_wrapper,
-        app_id="finPal",
-        feedbacks=[f_relevance],
+        sync_wrapper,
+        app_id="finPalv1",
+        feedbacks=[f_relevance, f_conciseness,f_correctness, f_helpfulness],
     )
 
     with tru_llm_standalone_recorder as recording:
-        tru_llm_standalone_recorder.app(message)
+        tru_llm_standalone_recorder.app(message=message)
 
 
 def main() -> None:

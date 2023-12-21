@@ -4,15 +4,10 @@ def synchronize_async_helper(fn_to_await):
     async_response = []
 
     async def run_and_capture_result():
-        if callable(fn_to_await):
-            r = await fn_to_await()
-        else:
-            r = await fn_to_await
+        r = await fn_to_await
         async_response.append(r)
 
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(run_and_capture_result())
-    loop.close()
-
+    loop = asyncio.get_event_loop()
+    coroutine = run_and_capture_result()
+    loop.run_until_complete(coroutine)
     return async_response[0]

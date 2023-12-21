@@ -84,4 +84,5 @@ class GeminiProVision:
         parsed_input = self.input_parser(files=files, text=text)
         res = self.model.generate_content(contents=parsed_input, stream=True,generation_config=generation_config,safety_settings=safety_settings)
         for r in res:
-            yield r.text
+            for part in r.parts:
+                yield part.text
