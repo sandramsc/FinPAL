@@ -142,8 +142,11 @@ Today datetime is {dt_string}
     # initialize truera
     # Imports main tools:
     from trulens_eval import Feedback, OpenAI as fOpenAI, Tru
+    from sqlalchemy import URL
 
-    tru = Tru()
+    tru = Tru(
+        database_url=os.getenv("TRUERA_DATABASE_URL"),
+    )
 
     from libs.typings import Message
 
@@ -163,15 +166,15 @@ Today datetime is {dt_string}
             await update.message.reply_markdown(text=progress.content)
             result = progress.content
         return result
-    
-    
-    def sync_wrapper(message:str):
-        import asyncio 
+
+    def sync_wrapper(message: str):
+        import asyncio
+
         loop = asyncio.get_event_loop()
         result = loop.run_until_complete(agent_wrapper(message=message))
         print(result)
         return result
-    
+
     # synchronize_async_helper(agent_wrapper, message)
     # initialize feedback
     # Initialize OpenAI-based feedback function collection class:
@@ -187,10 +190,11 @@ Today datetime is {dt_string}
     tru_llm_standalone_recorder = TruBasicApp(
         sync_wrapper,
         app_id="finPalv1",
-        feedbacks=[f_relevance, f_conciseness,f_correctness, f_helpfulness],
+        feedbacks=[f_relevance, f_conciseness, f_correctness, f_helpfulness],
     )
 
     with tru_llm_standalone_recorder as recording:
+        tru_llm_standalone_recorder.app(message=message)
         tru_llm_standalone_recorder.app(message=message)
 
 
