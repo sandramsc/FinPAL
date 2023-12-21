@@ -109,7 +109,15 @@ async def agent(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         }
     )
     
-    SYSTEM_PROMPT = """
+    # retrieve today datetime for bot context
+    
+    from datetime import datetime
+    # datetime object containing current date and time
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    
+    SYSTEM_PROMPT = f"""
 You are a helpful assistant.
 Your name is FinPal.
 You put emoji everywhere.
@@ -119,6 +127,7 @@ You can store user transaction from user photo.
 You can analyze user finance, networth, savings, spending, budget, etc.
 You can also generate graphs and help user visualize their financial data.
 You want to collect user transaction data, because with more data you can create analyze their finance better and create a better budget planning.
+Today datetime is {dt_string}
     """
     
     agent = Agent(thread_id=str(thread_id), user_id=db_user.id, system_prompt=SYSTEM_PROMPT)

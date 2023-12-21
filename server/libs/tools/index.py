@@ -2,8 +2,11 @@ import datetime
 import json
 from typing import Annotated, Literal
 from pydantic import BaseModel, Field
-from libs.llamaindex import pydantic_gemini
 from instructor import OpenAISchema
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class SaveTransactionToDB(OpenAISchema):
@@ -47,33 +50,39 @@ async def save_transaction_to_db(input: SaveTransactionToDB, user_id: str):
     print("db_transaction", db_transaction)
     return db_transaction.model_dump_json()
 
-
 class QueryUserTransaction(OpenAISchema):
     "Query user transaction data from database"
-    startDate: Annotated[str, Field(description="query startdate in yyyymmdd format")]
-    endDate: Annotated[str, Field(description="query enddate in yyyymmdd format")]
-    # sourceOrPayee: Annotated[str, Field(description="query sourceOrPayee column")] = None
-    # category: Annotated[
-    #     Literal[
-    #         "Grocery",
-    #         "FoodAndDining",
-    #         "RentAndMortgage",
-    #         "Utilities",
-    #         "Transportation",
-    #         "Entertainment",
-    #         "Healthcare",
-    #         "Clothing",
-    #         "Education",
-    #         "Miscellaneous",
-    #     ],
-    #     Field(description="query by category"),
-    # ]
-    # description: Annotated[str, Field(description="query by description")] = None
-    # currency: Annotated[str, Field(description="query by currency")] = None
+    startDate: Annotated[
+        str, Field(description="query startdate in yyyymmdd format")
+    ] = "00000101"
+    endDate: Annotated[
+        str, Field(description="query enddate in yyyymmdd format")
+    ] = "99991231"
+    queryKeywords: Annotated[
+        str, Field(description="query keywords related to transaction")
+    ] = "I want all transaction data"
+    sourceOrPayee: Annotated[str, Field(description="query sourceOrPayee column")] = None
+    category: Annotated[
+        Literal[
+            "Grocery",
+            "FoodAndDining",
+            "RentAndMortgage",
+            "Utilities",
+            "Transportation",
+            "Entertainment",
+            "Healthcare",
+            "Clothing",
+            "Education",
+            "Miscellaneous",
+        ],
+        Field(description="query by category"),
+    ]
+    description: Annotated[str, Field(description="query by description")] = None
+    currency: Annotated[str, Field(description="query by currency")] = None
 
 
 async def query_user_transaction(input: QueryUserTransaction, user_id: str):
-    print("query_user_transaction",input)
+    print("query_user_transaction", input)
     from libs.prisma import db
 
     # query data from db
@@ -81,12 +90,15 @@ async def query_user_transaction(input: QueryUserTransaction, user_id: str):
         where={
             "userId": user_id,
             "transactionDate": {
-                "gte": input.startDate if input.startDate else "00000000",
-                "lte": input.endDate if input.endDate else "99991231",
+                "gte": input.startDate,
+                "lte": input.endDate,
             },
         },
     )
-    
+    # from deps.openai import openai
+    # class Response(BaseModel):
+    #     is_within_query: Annotated[bool,Field(description="True if the transaction is within the query else False")]
+
     filtered_transactions = []
     count = 0
     total_expense = 0
@@ -100,18 +112,29 @@ async def query_user_transaction(input: QueryUserTransaction, user_id: str):
     average_expense = 0
     average_income = 0
     for transaction in db_transactions:
-        # # filter transaction
-        # if input.sourceOrPayee and input.sourceOrPayee != transaction.sourceOrPayee:
+        # filter transactions
+        # call llm to filter transaction by query
+        # res :Response = await openai.chat.completions.create(
+        #     model="gpt-3.5-turbo-1106",
+        #     response_model=Response,
+        #     messages=[
+        #         {
+        #             "role":"system",
+        #             "content":"Given a transaction data and a query, return True if transaction is within the query else False"
+        #         },
+        #         {
+        #             "role":"user",
+        #             "content":json.dumps(transaction.model_dump_json())
+        #         }
+        #     ]
+        # )
+
+        # if not res.is_within_query:
         #     continue
-        # if input.category and input.category != transaction.category:
-        #     continue
-        # if input.description and transaction.description.find(input.description) == -1:
-        #     continue
-        # if input.currency and input.currency != transaction.currency:
-        #     continue
+
         transaction.createdAt = transaction.createdAt.strftime("%Y%m%d")
         transaction.updatedAt = transaction.updatedAt.strftime("%Y%m%d")
-        
+
         # add transaction data
         transaction_data = transaction.model_dump()
         filtered_transactions.append(transaction_data)
@@ -150,47 +173,37 @@ async def query_user_transaction(input: QueryUserTransaction, user_id: str):
         "min_income": min_income,
         "transaction_data": filtered_transactions,
     }
-
     print(report)
-    return json.dumps(report)
+    # we use gemini to filter transactions
+    from deps.llamaindex import GeminiPro
+    from llama_index.llms import ChatMessage, MessageRole, ChatResponse
+
+    res = await GeminiPro.achat(
+        messages=[
+            ChatMessage(
+                role=MessageRole.USER,
+                content=f"""Given these transactions data, answer this query: {input.queryKeywords}
+                
+                transactions data:
+                
+                {json.dumps(report)}
+                """,
+            )
+        ]
+    )
+    return res.message.content
 
 
-# class QueryUserTransaction(OpenAISchema):
-#     "To query user transaction data"
-#     query: Annotated[str, Field(description="what to query")] = None
+class ReadUserTransactionChart(OpenAISchema):
+    "Retrieve user transaction chart and analysis"
+    startDate: Annotated[str, Field(description="query startdate in yyyymmdd format")] = "00000101"
+    endDate: Annotated[str, Field(description="query enddate in yyyymmdd format")] = "99991231"
 
-# async def query_user_transaction(input: QueryUserTransaction, user_id: str):
-#     SYSTEM_PROMPT = """
-#     userId is {user_id}
-#     transaction date is written in yyyymmdd format
 
-#     Given the following SQL tables, your job is to write queries given a user’s request.
+async def read_user_transaction_chart(input: ReadUserTransactionChart, user_id: str):
+    CLIENT_BASE_URL = os.getenv("CLIENT_BASE_URL")
 
-    # CREATE TABLE "Transaction" (
-    #     "id" TEXT NOT NULL,
-    #     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    #     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    #     "amountOut" TEXT,
-    #     "amountIn" TEXT,
-    #     "currency" TEXT,
-    #     "sourceOrPayee" TEXT,
-    #     "category" "Category" NOT NULL DEFAULT 'Miscellaneous',
-    #     "description" TEXT,
-    #     "transactionDate" TEXT,
-    #     "userId" TEXT,
-
-    #     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
-    # );
-
-#     example query:
-#     SELECT * FROM "Transaction"
-#     """
-#     from libs.genai import genai
-
-#     genai.GenerativeModel("models/gemini-pro")
-#     result = genai.generate_text(prompt=SYSTEM_PROMPT)
-
-#     raise "Error"
+    return f"{CLIENT_BASE_URL}/dashboard/user_id/{user_id}/start_date/{input.startDate}/end_date/{input.endDate}"
 
 
 TOOLS = {
@@ -201,6 +214,10 @@ TOOLS = {
     "QueryUserTransaction": {
         "fn": query_user_transaction,
         "schema": QueryUserTransaction,
+    },
+    "ReadUserTransactionChart": {
+        "fn": read_user_transaction_chart,
+        "schema": ReadUserTransactionChart,
     },
 }
 
