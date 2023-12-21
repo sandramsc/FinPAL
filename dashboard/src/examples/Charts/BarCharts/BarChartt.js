@@ -23,6 +23,9 @@ const LABELS = ["January", "February", "March", "April", "May", "June", "July", 
 
 const BarChartt = () => {
   const {user_id: userId, start_date: startDate, end_date: endDate} = useParams()
+  console.log("🚀 ~ file: BarChartt.js:26 ~ BarChartt ~ endDate:", endDate)
+  console.log("🚀 ~ file: BarChartt.js:26 ~ BarChartt ~ startDate:", startDate)
+  console.log("🚀 ~ file: BarChartt.js:26 ~ BarChartt ~ userId:", userId)
   const [chart, setChart] = useState({})
 
   // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
@@ -31,7 +34,7 @@ const BarChartt = () => {
   useEffect(() => {
     const fetchTransactions = async ({ startDate, endDate, userId }) => {
 
-      const response = await fetch(`${baseUrl}${apiKey}/?start_date=${startDate}&end_date=${endDate}&user_id=${userId}`);
+      const response = await fetch(`${baseUrl}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
       const data = await response.json();
       console.log("🚀 ~ file: BarChartt.js:35 ~ fetchTransactions ~ data:", data)
 
