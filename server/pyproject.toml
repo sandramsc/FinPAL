@@ -23,6 +23,7 @@ streamlit-javascript = "^0.1.5"
 openai = "^1.5.0"
 instructor = "^0.4.4"
 tiktoken = "^0.5.2"
+nest-asyncio = "^1.5.8"
 
 
 [build-system]

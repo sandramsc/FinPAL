@@ -10,10 +10,10 @@ load_dotenv()
 
 
 class SaveTransactionToDB(OpenAISchema):
-    "Save user transaction into database"
-    amountOut: str = None
-    amountIn: str = None
-    currency: str
+    "To save user transaction after user confirmed the correctness of transaction data"
+    amountOut: Annotated[str, Field(description="expense amount example: 25.78")] = "0"
+    amountIn: Annotated[str, Field(description="income amount example: 500.00")] = "0"
+    currency: Annotated[str, Field(description="currency symbol, example: USD, PHP, EUR, GBP")] = "0"
     sourceOrPayee: str = None
     category: Literal[
         "Grocery",
@@ -28,7 +28,7 @@ class SaveTransactionToDB(OpenAISchema):
         "Miscellaneous",
     ] = "Miscellaneous"
     description: str = None
-    transactionDate: Annotated[str, Field(description="yyyymmdd")] = None
+    transactionDate: Annotated[str, Field(description="yyyymmdd")]
 
 
 async def save_transaction_to_db(input: SaveTransactionToDB, user_id: str):
@@ -51,7 +51,7 @@ async def save_transaction_to_db(input: SaveTransactionToDB, user_id: str):
     return db_transaction.model_dump_json()
 
 class QueryUserTransaction(OpenAISchema):
-    "Query user transaction data from database"
+    "Query user transaction data"
     startDate: Annotated[
         str, Field(description="query startdate in yyyymmdd format")
     ] = "00000101"
@@ -61,24 +61,24 @@ class QueryUserTransaction(OpenAISchema):
     queryKeywords: Annotated[
         str, Field(description="query keywords related to transaction")
     ] = "I want all transaction data"
-    sourceOrPayee: Annotated[str, Field(description="query sourceOrPayee column")] = None
-    category: Annotated[
-        Literal[
-            "Grocery",
-            "FoodAndDining",
-            "RentAndMortgage",
-            "Utilities",
-            "Transportation",
-            "Entertainment",
-            "Healthcare",
-            "Clothing",
-            "Education",
-            "Miscellaneous",
-        ],
-        Field(description="query by category"),
-    ]
-    description: Annotated[str, Field(description="query by description")] = None
-    currency: Annotated[str, Field(description="query by currency")] = None
+    # sourceOrPayee: Annotated[str, Field(description="query sourceOrPayee column")] = None
+    # category: Annotated[
+    #     Literal[
+    #         "Grocery",
+    #         "FoodAndDining",
+    #         "RentAndMortgage",
+    #         "Utilities",
+    #         "Transportation",
+    #         "Entertainment",
+    #         "Healthcare",
+    #         "Clothing",
+    #         "Education",
+    #         "Miscellaneous",
+    #     ],
+    #     Field(description="query by category"),
+    # ]
+    # description: Annotated[str, Field(description="query by description")] = None
+    # currency: Annotated[str, Field(description="query by currency")] = None
 
 
 async def query_user_transaction(input: QueryUserTransaction, user_id: str):
@@ -195,7 +195,7 @@ async def query_user_transaction(input: QueryUserTransaction, user_id: str):
 
 
 class ReadUserTransactionChart(OpenAISchema):
-    "Retrieve user transaction chart and analysis"
+    "Create a chart of user transaction"
     startDate: Annotated[str, Field(description="query startdate in yyyymmdd format")] = "00000101"
     endDate: Annotated[str, Field(description="query enddate in yyyymmdd format")] = "99991231"
 
