@@ -16,14 +16,13 @@ ChartJS.register(
   LinearScale,
 );
 
-const baseUrl = "https://api.coinranking.com/v2/coins/?limit=10";
+const baseUrl = "https://finpal-alpha.23.94.26.231.sslip.io";
 const apiKey = "coinrankinga0d622c9c87f41f10b19b797ba4f932fa68aef3daff45766";
 const LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 const BarChartt = () => {
   const {user_id: userId, start_date: startDate, end_date: endDate} = useParams()
-  console.log("🚀 ~ file: BarChartt.js:25 ~ BarChart ~ userId:", userId)
   const [chart, setChart] = useState({})
 
   // var proxyUrl = "https://cors-anywhere.herokuapp.com/";

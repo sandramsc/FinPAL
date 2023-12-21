@@ -39,7 +39,7 @@ const routes = [
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
-    route: "/dashboard",
+    route: "/dashboard/user_id/:userId/start_date/:startDate/end_date/:endDate",
     icon: <IoHome size="15px" color="inherit" />,
     component: Dashboard,
     noCollapse: true,
