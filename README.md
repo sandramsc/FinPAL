@@ -32,6 +32,11 @@ View the Demo [App](https://finpal.vercel.app/)
 
 ## Screenshots
 ![firstscreenshot](https://github.com/sandramsc/FinPAL/assets/19821445/e2b1222f-7cc9-4526-91a8-367ed0ca7282)
+![uploa](https://github.com/sandramsc/FinPAL/assets/19821445/729e52e5-796a-49d5-8b5e-b42cdfcf9d25)
+![scree1](https://github.com/sandramsc/FinPAL/assets/19821445/6320686d-c98c-4db4-b892-e1654091bf4d)
+![sub11](https://github.com/sandramsc/FinPAL/assets/19821445/1028af3b-7a60-4e77-9f84-92c131c55200)
+![sub22](https://github.com/sandramsc/FinPAL/assets/19821445/66b51c38-64c3-49b9-aae5-66906711e063)
+![sub33](https://github.com/sandramsc/FinPAL/assets/19821445/82f2c756-0919-450c-82c2-8523e5099277)
 ## Technology Stack
 
 | Technology  | Description              |
