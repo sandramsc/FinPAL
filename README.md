@@ -94,7 +94,6 @@ docker compose -f compose.local.yml up
 | --------------- | ------------------------------------------- |
 | Sandra Ashipala | https://www.linkedin.com/in/sandraashipala/ |
 | Viky Wahjoedin  | https://www.linkedin.com/in/vikyweb/        |
-| name            | social                                      |
 
 ## License
 
