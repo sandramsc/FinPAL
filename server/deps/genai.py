@@ -1,18 +1,16 @@
 from typing import Any, AsyncIterable, Literal, Optional
 import google.generativeai as genai
-from google.generativeai.types.content_types import ContentDict
 
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
+from libs.typings import Message
+
 
 load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
-
-
-from libs.typings import Message
 
 
 class GeminiPro:
@@ -84,5 +82,4 @@ class GeminiProVision:
         parsed_input = self.input_parser(files=files, text=text)
         res = self.model.generate_content(contents=parsed_input, stream=True,generation_config=generation_config,safety_settings=safety_settings)
         for r in res:
-            for part in r.parts:
-                yield part.text
+            yield r.text

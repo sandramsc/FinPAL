@@ -51,8 +51,8 @@ model Transaction {
   id              String   @id @default(uuid())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @default(now()) @updatedAt
-  amountOut       String?
-  amountIn        String?
+  amountOut       String?  @default("0")
+  amountIn        String?  @default("0")
   currency        String?
   sourceOrPayee   String?
   category        Category @default(Miscellaneous)

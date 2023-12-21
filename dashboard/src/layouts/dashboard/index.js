@@ -54,11 +54,79 @@ import LineChart from "examples/Charts/LineCharts/LineChart";
 import BarChartt from "examples/Charts/BarCharts/BarChartt";
 import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
+import { useParams } from "react-router-dom";
+
+// react hook
+import { useState, useEffect } from "react";
+
+const SERVER_BASE_URL = "https://finpal-alpha.23.94.26.231.sslip.io";
 
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
+  const { user_id: userId, start_date: startDate, end_date: endDate } = useParams()
+  const [lineChartData, setLineChartData] = useState()
+  console.log("🚀 ~ file: index.js:69 ~ Dashboard ~ lineChartData:", lineChartData)
+  const [barChartData, setBarChartData] = useState()
+  console.log("🚀 ~ file: index.js:70 ~ Dashboard ~ barChartData:", barChartData)
 
+  useEffect(() => {
+    const fetchTransactions = async ({ startDate, endDate, userId }) => {
+
+      const response = await fetch(`${SERVER_BASE_URL}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
+      const data = await response.json();
+      console.log("🚀 ~ file: index.js:78 ~ fetchTransactions ~ data:", data)
+
+      let expenseDataset = new Array(12).fill(0)
+      let incomeDataset = new Array(12).fill(0)
+
+      // key as categories, value as total expense
+      let barChartData = {}
+
+      for (const transaction of data.transactions) {
+        const amountIn = Number(transaction.amountIn)
+        const amountOut = Number(transaction.amountOut)
+        const category = transaction.category
+        const createdAt = transaction.createdAt
+        const currency = transaction.currency
+        const description = transaction.description
+        const id = transaction.id
+        const sourceOrPayee = transaction.sourceOrPayee
+        const transactionDate = transaction.transactionDate
+        const updatedAt = transaction.updatedAt
+        const userId = transaction.userId
+
+        if (category in barChartData) {
+          barChartData[category] += amountOut
+        } else {
+          barChartData[category] = amountOut
+        }
+
+        // remove 0 at the left
+        const labelIndex = Number(transactionDate.slice(4, 6)).toString()
+
+        incomeDataset[labelIndex] += amountIn
+        expenseDataset[labelIndex] += amountOut
+      }
+
+      setLineChartData([
+        {
+          name: "Income",
+          data: incomeDataset
+        },
+        {
+          name: "Expense",
+          data: expenseDataset
+        }
+      ])
+
+      setBarChartData({
+        labels: Object.keys(barChartData),
+        expenseDataset: Object.values(barChartData)
+      })
+    }
+    fetchTransactions({ startDate: startDate, endDate: endDate, userId: userId });
+  }, [])
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -118,149 +186,154 @@ function Dashboard() {
                     My Activity
                   </VuiTypography>
                   <VuiBox sx={{ height: "310px" }}>
-                    <LineChart
-                      lineChartData={lineChartDataDashboard}
-                      lineChartOptions={lineChartOptionsDashboard}
-                    />
+                    {lineChartData && (
+                      <LineChart
+                        lineChartData={lineChartData}
+                        lineChartOptions={lineChartOptionsDashboard}
+                      />
+                    )}
                   </VuiBox>
                 </VuiBox>
               </Card>
             </Grid>
           </Grid>
         </VuiBox>
-        
+
         <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
           <Grid item xs={12} md={6} lg={22}>
             <Card>
-                <VuiBox>
-                  <VuiBox 
-                    className="App"
-                    mb="24px"
-                    height="420px"
-                    sx={{
-                      background: linearGradient(
-                        cardContent.main,
-                        cardContent.state,
-                        cardContent.deg
-                      ),
-                      borderRadius: "20px",
-                    }}
-                  >
+              <VuiBox>
+                <VuiBox
+                  className="App"
+                  mb="24px"
+                  height="420px"
+                  sx={{
+                    background: linearGradient(
+                      cardContent.main,
+                      cardContent.state,
+                      cardContent.deg
+                    ),
+                    borderRadius: "20px",
+                  }}
+                >
+                  {barChartData && (
                     <BarChartt
+                      barChartData={barChartData}
+                      label="Spending Categories"
                     />
-
-                  </VuiBox>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                  My Cryptocurrency Profile
-                  </VuiTypography>
-                  <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      (+23){" "}
-                      <VuiTypography variant="button" color="text" fontWeight="regular">
-                        than last week
-                      </VuiTypography>
-                    </VuiTypography>
-                  </VuiBox>
-                  <Grid container spacing="50px">
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoWallet color="#fff" size="18px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Utilities
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        $120
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoIosRocket color="#fff" size="18px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Entertainment
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        $80
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <FaShoppingCart color="#fff" size="18px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Groceries
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        $240
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoBuild color="#fff" size="18px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Education
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        $320
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                  </Grid>
+                  )}
                 </VuiBox>
-              </Card>
+                <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
+                  My Cryptocurrency Profile
+                </VuiTypography>
+                <VuiBox display="flex" alignItems="center" mb="40px">
+                  <VuiTypography variant="button" color="success" fontWeight="bold">
+                    (+23){" "}
+                    <VuiTypography variant="button" color="text" fontWeight="regular">
+                      than last week
+                    </VuiTypography>
+                  </VuiTypography>
+                </VuiBox>
+                <Grid container spacing="50px">
+                  <Grid item xs={6} md={3} lg={3}>
+                    <Stack
+                      direction="row"
+                      spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
+                      mb="6px"
+                    >
+                      <VuiBox
+                        bgColor="info"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
+                      >
+                        <IoWallet color="#fff" size="18px" />
+                      </VuiBox>
+                      <VuiTypography color="text" variant="button" fontWeight="medium">
+                        Utilities
+                      </VuiTypography>
+                    </Stack>
+                    <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      $120
+                    </VuiTypography>
+                    <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
+                  </Grid>
+                  <Grid item xs={6} md={3} lg={3}>
+                    <Stack
+                      direction="row"
+                      spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
+                      mb="6px"
+                    >
+                      <VuiBox
+                        bgColor="info"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
+                      >
+                        <IoIosRocket color="#fff" size="18px" />
+                      </VuiBox>
+                      <VuiTypography color="text" variant="button" fontWeight="medium">
+                        Entertainment
+                      </VuiTypography>
+                    </Stack>
+                    <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      $80
+                    </VuiTypography>
+                    <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
+                  </Grid>
+                  <Grid item xs={6} md={3} lg={3}>
+                    <Stack
+                      direction="row"
+                      spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
+                      mb="6px"
+                    >
+                      <VuiBox
+                        bgColor="info"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
+                      >
+                        <FaShoppingCart color="#fff" size="18px" />
+                      </VuiBox>
+                      <VuiTypography color="text" variant="button" fontWeight="medium">
+                        Groceries
+                      </VuiTypography>
+                    </Stack>
+                    <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      $240
+                    </VuiTypography>
+                    <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
+                  </Grid>
+                  <Grid item xs={6} md={3} lg={3}>
+                    <Stack
+                      direction="row"
+                      spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
+                      mb="6px"
+                    >
+                      <VuiBox
+                        bgColor="info"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
+                      >
+                        <IoBuild color="#fff" size="18px" />
+                      </VuiBox>
+                      <VuiTypography color="text" variant="button" fontWeight="medium">
+                        Education
+                      </VuiTypography>
+                    </Stack>
+                    <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      $320
+                    </VuiTypography>
+                    <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
+                  </Grid>
+                </Grid>
+              </VuiBox>
+            </Card>
           </Grid>
         </Grid>
       </VuiBox>
