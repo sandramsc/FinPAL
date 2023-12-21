@@ -13,7 +13,10 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
 function Breadcrumbs({ icon, title, route, light }) {
-  const routes = route.slice(0, -1);
+  if (title === ":end_date") {
+    title = "Dashboard"
+  }
+  const routes = []
 
   return (
     <VuiBox mr={{ xs: 0, xl: 8 }}>

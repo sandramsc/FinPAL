@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
-from typings.index import Message
+from libs.typings import Message
 
 
 load_dotenv()
