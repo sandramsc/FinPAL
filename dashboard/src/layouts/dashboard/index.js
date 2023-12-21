@@ -59,25 +59,29 @@ import { useParams } from "react-router-dom";
 // react hook
 import { useState, useEffect } from "react";
 
-const baseUrl = "https://finpal-alpha.23.94.26.231.sslip.io";
-const LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const SERVER_BASE_URL = "https://finpal-alpha.23.94.26.231.sslip.io";
 
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
   const { user_id: userId, start_date: startDate, end_date: endDate } = useParams()
-  const [lineChart, setLineChart] = useState()
-  console.log("🚀 ~ file: index.js:63 ~ Dashboard ~ userId:", userId)
+  const [lineChartData, setLineChartData] = useState()
+  console.log("🚀 ~ file: index.js:69 ~ Dashboard ~ lineChartData:", lineChartData)
+  const [barChartData, setBarChartData] = useState()
+  console.log("🚀 ~ file: index.js:70 ~ Dashboard ~ barChartData:", barChartData)
 
   useEffect(() => {
     const fetchTransactions = async ({ startDate, endDate, userId }) => {
 
-      const response = await fetch(`${baseUrl}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
+      const response = await fetch(`${SERVER_BASE_URL}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
       const data = await response.json();
-      console.log("🚀 ~ file: BarChartt.js:35 ~ fetchTransactions ~ data:", data)
 
       let expenseDataset = new Array(12).fill(0)
       let incomeDataset = new Array(12).fill(0)
+
+      // key as categories, value as total expense
+      let barChartData = {}
+
       for (const transaction of data.transactions) {
         const amountIn = Number(transaction.amountIn)
         const amountOut = Number(transaction.amountOut)
@@ -91,22 +95,34 @@ function Dashboard() {
         const updatedAt = transaction.updatedAt
         const userId = transaction.userId
 
+        if (category in barChartData) {
+          barChartData[category] += amountOut
+        } else {
+          barChartData[category] = amountOut
+        }
+
         // remove 0 at the left
         const labelIndex = Number(transactionDate.slice(4, 6)).toString()
 
         incomeDataset[labelIndex] += amountIn
         expenseDataset[labelIndex] += amountOut
-        setLineChart([
-          {
-            name: "Income",
-            data: incomeDataset
-          },
-          {
-            name: "Expense",
-            data: expenseDataset
-          }
-        ])
       }
+
+      setLineChartData([
+        {
+          name: "Income",
+          data: incomeDataset
+        },
+        {
+          name: "Expense",
+          data: expenseDataset
+        }
+      ])
+
+      setBarChartData({
+        labels: Object.keys(barChartData),
+        expenseDataset: Object.values(barChartData)
+      })
     }
     fetchTransactions({ startDate: startDate, endDate: endDate, userId: userId });
   }, [])
@@ -177,9 +193,9 @@ function Dashboard() {
                     </VuiTypography>
                   </VuiBox>
                   <VuiBox sx={{ height: "310px" }}>
-                    {lineChart && (
+                    {lineChartData && (
                       <LineChart
-                        lineChartData={lineChart}
+                        lineChartData={lineChartData}
                         lineChartOptions={lineChartOptionsDashboard}
                       />
                     )}
@@ -207,11 +223,12 @@ function Dashboard() {
                     borderRadius: "20px",
                   }}
                 >
-                  <BarChart
-                    lineChartData={lineChart}
-                    lineChartOptions={lineChartOptionsDashboard}
-                  />
-
+                  {barChartData && (
+                    <BarChartt
+                      barChartData={barChartData}
+                      label="Spending Categories"
+                    />
+                  )}
                 </VuiBox>
                 <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
                   My Cryptocurrency Profile
