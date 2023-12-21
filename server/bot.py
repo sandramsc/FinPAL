@@ -195,6 +195,7 @@ Today datetime is {dt_string}
 
     with tru_llm_standalone_recorder as recording:
         tru_llm_standalone_recorder.app(message=message)
+        tru_llm_standalone_recorder.app(message=message)
 
 
 def main() -> None:
