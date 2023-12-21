@@ -184,14 +184,6 @@ function Dashboard() {
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
                     My Activity
                   </VuiTypography>
-                  <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      Saved +5% more{" "}
-                      <VuiTypography variant="button" color="text" fontWeight="regular">
-                        in 2023
-                      </VuiTypography>
-                    </VuiTypography>
-                  </VuiBox>
                   <VuiBox sx={{ height: "310px" }}>
                     {lineChartData && (
                       <LineChart
