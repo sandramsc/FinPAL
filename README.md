@@ -76,10 +76,10 @@ View the Demo [App](https://finpal.vercel.app/)
 
 2. Participate in financial dialogues with the bot, receiving guidance and responses on personal finance topics.
 
- <div id="header" width="250px" align="left">
+
 ![qr_tmp_1_-removebg-preview](https://github.com/sandramsc/sandramsc/assets/19821445/78d4e721-8960-4f1a-bbbb-7f6c821821a8)
 
-</div>
+
 
 ## How to use the app
 
