@@ -1,13 +1,13 @@
 <!-- PROJECT TITLE -->
   <h1 align="center">FinPAL</h1>
  <h2 2 align="center">
-    Simplifying Personal Finantial Statments vizualization and interaction—an innovative human interaction approach.
+   FinPAL - Your Telegram Finance Ally
     <br />
     </h2>
 
 ## Application Description
 
-a web tool that ..
+Introducing FinPAL, your dedicated Financial Assistant Telegram bot meticulously crafted to offer unparalleled financial guidance and support. Harnessing the cutting-edge Trulens eval llm monitoring technology, FinPAL is engineered to deliver contextually rich and actionable financial advice. Powered by advanced algorithms and user-friendly functionalities, it stands out with unique features tailored for a seamless user experience.
 
 ## Table of Contents
 
@@ -29,6 +29,12 @@ a web tool that ..
 ## Video Demo
 
 View the Demo [App](https://finpal.vercel.app/)
+
+## Web App
+
+[Landing page](https://finpallandingpage.vercel.app/)
+
+[Dashboard](https://finpaldash.vercel.app/profile)
 
 ## Screenshots
 ![firstscreenshot](https://github.com/sandramsc/FinPAL/assets/19821445/e2b1222f-7cc9-4526-91a8-367ed0ca7282)
@@ -58,13 +64,11 @@ View the Demo [App](https://finpal.vercel.app/)
 
 ## Features
 
-1. Feature 1
-
-2. Feature 1
-
-3. Feature 1
-
-4. Feature 1
+1. FinPAL boasts a sophisticated suite of features designed for seamless financial management.
+2. FinPAL with Trulens eval llm monitoring, we have a robust llm monitoring system in place, get automated and measurable feedback on how the llm is performing.
+3. Integration with Telegram to ensure effective communication right in user pocket.
+4. Ability to save transaction receipts through chat or photo to add a practical touch. 
+5. Generate transaction charts effortlessly through chat, and smoothly query transaction data for comprehensive financial insights.
 
 ## How to use the app
 
