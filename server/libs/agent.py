@@ -52,7 +52,7 @@ class Agent:
         # retrieve messages from DB
         # reversed because we want oldest messages at the top, newest at the bottom
         db_messages = db.message.find_many(
-            where={"threadId": self.thread_id}, take=20, order={"createdAt": "desc"}
+            where={"threadId": self.thread_id}, take=5, order={"createdAt": "desc"}
         )
 
         reversed_db_messages = db_messages[::-1]
@@ -169,10 +169,7 @@ class Agent:
             messages=input,
             model="gpt-3.5-turbo-1106",
             tools=self.tools,
-            presence_penalty=2,
             max_tokens=self.max_response_token,
-            frequency_penalty=2,
-            temperature=0.2
         )
         res_messages = res.choices
 
