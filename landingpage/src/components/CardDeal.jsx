@@ -1,22 +1,18 @@
 import { telegrambot } from "../assets";
 import styles, { layout } from "../style";
-import Button from "./Button";
+import Scan_Button from "./Scan_Button";
 
 const CardDeal = () => (
   <section className={layout.section}>
     <div className={layout.sectionInfo}>
       <h2 className={styles.heading2}>
-        Explore our telegram bot
+        Explore our Telegram bot
       </h2>
-      <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-      Build on FinPAL to create innovative and streamlined customer experiences.
-      </p>
-
-      <Button styles={`mt-10`} />
+      <Scan_Button styles={`mt-10`} />
     </div>
 
     <div className={layout.sectionImg}>
-      <img src={telegrambot} alt="billing" className="w-[70%] h-[90%]" />
+      <img src={telegrambot} alt="billing" className="w-[70%] h-[100%]" />
     </div>
   </section>
 );
