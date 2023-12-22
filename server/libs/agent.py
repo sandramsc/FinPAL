@@ -97,18 +97,21 @@ class Agent:
 
         output = input.content
         PROMPT = """
-        Given an image or images, write a detailed description of the image. Don't make up stuff.
-        Objects: Mention all available object in the images, the size, the brand, the colour, etc.
-        Text: Mention all the text in the image and on what object it's written on.
-        
-        If it's a receipt, extract all the information from the receipt.
-            "amountIn":
-            "amountOut": 
-            "category": 
-            "transactionDate": 
-            "currency": 
-            "description": 
-            "sourceOrPayee": 
+        Extract all the information from the receipt.
+        Don't make up stuff.
+        Think step by step.
+        Double check the information you extracted.
+        Put unknown if you cannot extract the information from the image.
+        Extract the following data:
+        ```
+        "amountIn":
+        "amountOut": 
+        "category": 
+        "transactionDate": 
+        "currency": 
+        "description": 
+        "sourceOrPayee": 
+        ```
         """
 
         if input.photo:
