@@ -139,14 +139,6 @@ Today datetime is {dt_string}
     agent = Agent(
         thread_id=str(thread_id), user_id=db_user.id, system_prompt=SYSTEM_PROMPT
     )
-    # initialize truera
-    # Imports main tools:
-    from trulens_eval import Feedback, OpenAI as fOpenAI, Tru
-    from sqlalchemy import URL
-
-    tru = Tru(
-        database_url=os.getenv("TRUERA_DATABASE_URL"),
-    )
 
     from libs.typings import Message
 
@@ -172,9 +164,9 @@ Today datetime is {dt_string}
 
         loop = asyncio.get_event_loop()
         result = loop.run_until_complete(agent_wrapper(message=message))
-        print(result)
         return result
-
+    
+    from trulens_eval import Feedback, OpenAI as fOpenAI
     # synchronize_async_helper(agent_wrapper, message)
     # initialize feedback
     # Initialize OpenAI-based feedback function collection class:
@@ -182,19 +174,18 @@ Today datetime is {dt_string}
 
     # Define a relevance function from openai
     f_relevance = Feedback(fopenai.relevance_with_cot_reasons).on_input_output()
-    f_conciseness = Feedback(fopenai.conciseness_with_cot_reasons).on_output()
-    f_correctness = Feedback(fopenai.coherence_with_cot_reasons).on_output()
+    # f_conciseness = Feedback(fopenai.conciseness_with_cot_reasons).on_output()
+    # f_correctness = Feedback(fopenai.coherence_with_cot_reasons).on_output()
     f_helpfulness = Feedback(fopenai.helpfulness_with_cot_reasons).on_output()
     from trulens_eval import TruBasicApp
 
     tru_llm_standalone_recorder = TruBasicApp(
         sync_wrapper,
         app_id="finPalv1",
-        feedbacks=[f_relevance, f_conciseness, f_correctness, f_helpfulness],
+        feedbacks=[f_relevance, f_helpfulness],
     )
 
     with tru_llm_standalone_recorder as recording:
-        tru_llm_standalone_recorder.app(message=message)
         tru_llm_standalone_recorder.app(message=message)
 
 
