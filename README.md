@@ -70,6 +70,17 @@ View the Demo [App](https://finpal.vercel.app/)
 4. Ability to save transaction receipts through chat or photo to add a practical touch. 
 5. Generate transaction charts effortlessly through chat, and smoothly query transaction data for comprehensive financial insights.
 
+## How to use the FinPAL Telegram bot
+
+1. Initiate a conversation with the bot with a text prompt i.e /start  command.
+
+2. Participate in financial dialogues with the bot, receiving guidance and responses on personal finance topics.
+
+ <div id="header" width="250px" align="left">
+![qr_tmp_1_-removebg-preview](https://github.com/sandramsc/sandramsc/assets/19821445/78d4e721-8960-4f1a-bbbb-7f6c821821a8)
+
+</div>
+
 ## How to use the app
 
 **Step #1** - Clone the project
