@@ -37,8 +37,9 @@ View the Demo [App](https://finpal.vercel.app/)
 [Dashboard](https://finpaldash.vercel.app/dashboard/user_id/test/start_date/20230101/end_date/20231212)
 
 ## Screenshots
-![firstscreenshot](https://github.com/sandramsc/FinPAL/assets/19821445/e2b1222f-7cc9-4526-91a8-367ed0ca7282)
-![scree1](https://github.com/sandramsc/FinPAL/assets/19821445/6320686d-c98c-4db4-b892-e1654091bf4d)
+
+![imageedit_5_5332482570](https://github.com/sandramsc/FinPAL/assets/19821445/02888c94-44e2-44de-929a-743d5c6a0871)
+![land2](https://github.com/sandramsc/FinPAL/assets/19821445/8e95b172-7fdf-4d56-beb2-8efbc7903d48)
 ![uploa](https://github.com/sandramsc/FinPAL/assets/19821445/729e52e5-796a-49d5-8b5e-b42cdfcf9d25)
 ![sub11](https://github.com/sandramsc/FinPAL/assets/19821445/1028af3b-7a60-4e77-9f84-92c131c55200)
 ![sub22](https://github.com/sandramsc/FinPAL/assets/19821445/66b51c38-64c3-49b9-aae5-66906711e063)
