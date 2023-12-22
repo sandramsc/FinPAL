@@ -26,9 +26,9 @@ Introducing FinPAL, your dedicated Financial Assistant Telegram bot meticulously
 
 </details>
 
-## Video Demo
+## Web App Video Demo
 
-View the Demo [App](https://finpal.vercel.app/)
+[View the Demo](https://youtu.be/3UixUZVxh6U)
 
 ## Web App
 
