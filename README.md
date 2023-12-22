@@ -32,9 +32,9 @@ View the Demo [App](https://finpal.vercel.app/)
 
 ## Web App
 
-[Landing page](https://finpaldash.vercel.app/profile)
+[Landing page](https://finpallandingpage.vercel.app/)
 
-[Dashboard](https://finpal.vercel.app/)
+[Dashboard](https://finpaldash.vercel.app/profile)
 
 ## Screenshots
 ![firstscreenshot](https://github.com/sandramsc/FinPAL/assets/19821445/e2b1222f-7cc9-4526-91a8-367ed0ca7282)
