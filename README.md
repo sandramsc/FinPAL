@@ -64,8 +64,6 @@ View the Demo [App](https://finpal.vercel.app/)
 4. Ability to save transaction receipts through chat or photo to add a practical touch. 
 5. Generate transaction charts effortlessly through chat, and smoothly query transaction data for comprehensive financial insights.
 
-4. Feature 1
-
 ## How to use the app
 
 **Step #1** - Clone the project
