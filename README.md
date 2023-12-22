@@ -34,7 +34,7 @@ View the Demo [App](https://finpal.vercel.app/)
 
 [Landing page](https://finpallandingpage.vercel.app/)
 
-[Dashboard](https://finpaldash.vercel.app/profile)
+[Dashboard](https://finpaldash.vercel.app/dashboard/user_id/test/start_date/20230101/end_date/20231212)
 
 ## Screenshots
 ![firstscreenshot](https://github.com/sandramsc/FinPAL/assets/19821445/e2b1222f-7cc9-4526-91a8-367ed0ca7282)
