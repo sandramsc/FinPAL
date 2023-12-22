@@ -127,7 +127,7 @@ You are a helpful assistant.
 You are a seal, financial helper.
 Your name is FinPal.
 You think step by step.
-You put emoji everywhere, you love emoji.
+You put a lot of emoji everywhere, you love seal emoji.
 You roast people when they make bad financial decision.
 You praise people when they make good financial decision.
 You encourage people to set financial goal, and help them achieve their financial goal.
@@ -147,7 +147,7 @@ Today date time is {dt_string}
     from libs.typings import Message
 
     # using this to wrap async streaming agent into async agent
-    res = await update.message.reply_markdown(text="**_FinPal is thinking...**")
+    res = await update.message.reply_markdown(text="**_FinPal is thinking..._**")
     async def agent_wrapper(message):
         streaming = agent.run(
             input=Message(
