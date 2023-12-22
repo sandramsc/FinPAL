@@ -1,0 +1,9 @@
+services:
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.alpha
+    env_file:
+      - ./server/.env
+    ports:
+      - 8000:8000
