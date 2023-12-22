@@ -66,20 +66,17 @@ function Dashboard() {
   const { cardContent } = gradients;
   const { user_id: userId, start_date: startDate, end_date: endDate } = useParams()
   const [lineChartData, setLineChartData] = useState()
-  console.log("🚀 ~ file: index.js:69 ~ Dashboard ~ lineChartData:", lineChartData)
   const [barChartData, setBarChartData] = useState()
-  console.log("🚀 ~ file: index.js:70 ~ Dashboard ~ barChartData:", barChartData)
-
   useEffect(() => {
     const fetchTransactions = async ({ startDate, endDate, userId }) => {
 
       const response = await fetch(`${SERVER_BASE_URL}/transactions/?user_id=${userId}&start_date=${startDate}&end_date=${endDate}`);
       const data = await response.json();
-      console.log("🚀 ~ file: index.js:78 ~ fetchTransactions ~ data:", data)
-
       let expenseDataset = new Array(12).fill(0)
+      console.log("🚀 ~ file: index.js:76 ~ fetchTransactions ~ expenseDataset:", expenseDataset)
       let incomeDataset = new Array(12).fill(0)
-
+      console.log("🚀 ~ file: index.js:78 ~ fetchTransactions ~ incomeDataset:", incomeDataset)
+      
       // key as categories, value as total expense
       let barChartData = {}
 
@@ -103,7 +100,7 @@ function Dashboard() {
         }
 
         // remove 0 at the left
-        const labelIndex = Number(transactionDate.slice(4, 6)).toString()
+        const labelIndex = Number(transactionDate.slice(4, 6) - 1).toString()
 
         incomeDataset[labelIndex] += amountIn
         expenseDataset[labelIndex] += amountOut
