@@ -30,10 +30,10 @@ const Navbar = () => {
 
       <div className="gpt3__navbar">
 <div className="gpt3__navbar-sign">
-<a href="https://finpaldash.vercel.app/">
+<a href="https://finpaldash.vercel.app/dashboard/user_id/test/start_date/20230101/end_date/20231212">
   <p>Sign in</p>
   </a>
-  <a href="https://finpaldash.vercel.app/">
+  <a href="https://finpaldash.vercel.app/dashboard/user_id/test/start_date/20230101/end_date/20231212">
   <button type="button">Sign up</button>
   </a>
 </div>
