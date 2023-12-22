@@ -102,11 +102,11 @@ class Agent:
         Text: Mention all the text in the image and on what object it's written on.
         
         If it's a receipt, extract all the information from the receipt.
-            "amountIn": 0
-            "amountOut": 20.56
-            "category": 'Grocery', 'FoodAndDining', 'RentAndMortgage', 'Utilities', 'Transportation', 'Entertainment', 'Healthcare', 'Clothing', 'Education' or 'Miscellaneous'
-            "transactionDate": yyyymmdd
-            "currency": USD
+            "amountIn":
+            "amountOut": 
+            "category": 
+            "transactionDate": 
+            "currency": 
             "description": 
             "sourceOrPayee": 
         """
