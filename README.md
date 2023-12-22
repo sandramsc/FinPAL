@@ -57,7 +57,6 @@ Introducing FinPAL, your dedicated Financial Assistant Telegram bot meticulously
 | Prisma    | Next-generation ORM for Node.js & TypeScript      |
 | Pyrogram      | a modern, elegant and asynchronous MTProto API framework.              |
 | TgCrypto | a Cryptography Library written in C as a Python extension         |
-| LlamaIndex  | a simple, flexible data framework for connecting custom data sources to large language models (LLMs) |
 | Google Generative AI    | a category of artificial intelligence that can create new text, images, video, audio, or code       |
 | Matplotlib      | a comprehensive library for creating static, animated, and interactive visualizations in Python              |
 | TruLens-Eval | an open source library for evaluating and tracking the performance of LLM apps, such as RAGs.        |
