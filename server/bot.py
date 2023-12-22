@@ -147,6 +147,7 @@ Today date time is {dt_string}
     from libs.typings import Message
 
     # using this to wrap async streaming agent into async agent
+    res = await update.message.reply_markdown(text="**_FinPal is thinking...**")
     async def agent_wrapper(message):
         streaming = agent.run(
             input=Message(
@@ -156,11 +157,12 @@ Today date time is {dt_string}
             )
         )
         result = ""
+        from telegram.constants import ParseMode
         # from telegram.constants import ParseMode
         async for progress in streaming:
             print("progress", progress)
-            await update.message.reply_markdown(text=progress.content)
             result = progress.content
+            await res.edit_text(text=result, parse_mode=ParseMode.MARKDOWN)
         return result
 
     def sync_wrapper(message: str):
